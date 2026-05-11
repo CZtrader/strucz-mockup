@@ -1,815 +1,389 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>STRUCZ™ — ZD Integrated Circuits</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════════════════════════════
-   STRUCZ™ Design System v1.0
-   ZD Integrated Circuits — Craig Lee Zurman
-   ══════════════════════════════════════════════ */
-:root {
-  --blue:#1B3A6B; --accent:#2E86AB; --light:#D5E8F0;
-  --bg:#0f1117; --surface:#161b27; --card:#1e2535;
-  --hover:#232d40; --b1:#2a3347; --b2:#374160;
-  --text:#e2e8f0; --muted:#8892a4; --dim:#4a5568;
-  --green:#10b981; --gbg:#0a2418;
-  --red:#ef4444;   --rbg:#2d1515;
-  --amber:#f59e0b; --abg:#2d2010;
-  --zed:#7B2FBE;   --zl:#a855f7; --zbg:#1a1030;
-  --sans:'DM Sans',system-ui,sans-serif;
-  --mono:'DM Mono','Fira Code',monospace;
-  --nav:224px; --hdr:54px; --zw:348px;
-}
+:root{--blue:#1B3A6B;--accent:#2E86AB;--bg:#0f1117;--surface:#161b27;--card:#1e2535;--hover:#232d40;--b1:#2a3347;--b2:#374160;--text:#e2e8f0;--muted:#8892a4;--dim:#4a5568;--green:#10b981;--red:#ef4444;--amber:#f59e0b;--zed:#7B2FBE;--zl:#a855f7;--zbg:#1a1030;--sans:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',monospace;--nav:224px;--hdr:54px;--zw:340px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
-button{font-family:var(--sans);cursor:pointer}
-input,textarea{font-family:var(--sans)}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px}
-
-/* ── Shell ── */
-.shell{display:flex;height:100vh;overflow:hidden}
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.content-area{flex:1;display:flex;overflow:hidden}
-.page-body{flex:1;overflow-y:auto;overflow-x:hidden;min-width:0}
-
-/* ── Sidebar ── */
-.sidebar{width:var(--nav);background:var(--surface);border-right:1px solid var(--b1);display:flex;flex-direction:column;flex-shrink:0;height:100%}
-.sidebar-logo{padding:15px 18px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:11px}
-.logo-sx{width:34px;height:34px;background:var(--blue);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;letter-spacing:-.5px;flex-shrink:0;box-shadow:0 2px 8px rgba(27,58,107,.4)}
-.logo-name{font-weight:700;font-size:15px;color:var(--text);letter-spacing:-.3px;line-height:1.15}
-.logo-sub{font-size:10px;color:var(--muted);letter-spacing:.03em}
-.nav-section{padding:10px 16px 5px;font-size:10px;color:var(--dim);letter-spacing:.09em;font-weight:600;text-transform:uppercase}
-.nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 16px;background:transparent;border:none;border-left:2px solid transparent;color:var(--muted);font-size:13px;font-weight:400;transition:all .12s;text-align:left;border-radius:0 5px 5px 0;line-height:1}
-.nav-item:hover{background:var(--hover);color:var(--text)}
-.nav-item.active{background:rgba(46,134,171,.13);border-left-color:var(--accent);color:var(--accent);font-weight:500}
-.nav-icon{width:16px;height:16px;flex-shrink:0;opacity:.7}
-.nav-item.active .nav-icon{opacity:1}
-.nav-divider{height:1px;background:var(--b1);margin:6px 0}
-.sidebar-footer{padding:13px 16px;border-top:1px solid var(--b1);display:flex;align-items:center;gap:10px}
-
-/* ── Header ── */
-.header{height:var(--hdr);background:var(--surface);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0}
-.header-title{font-size:15px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.search-bar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--b1);border-radius:8px;padding:6px 12px;width:260px;transition:border-color .15s}
-.search-bar:focus-within{border-color:var(--accent)}
-.search-bar input{border:none;background:transparent;color:var(--text);font-size:13px;outline:none;width:100%}
-.search-bar input::placeholder{color:var(--dim)}
-.zed-btn{display:flex;align-items:center;gap:8px;background:rgba(123,47,190,.18);border:1px solid rgba(123,47,190,.38);border-radius:8px;padding:7px 14px;color:var(--zl);font-size:13px;font-weight:600;transition:all .15s;white-space:nowrap}
-.zed-btn:hover{background:rgba(123,47,190,.28)}
-.notif-badge{background:var(--red);color:#fff;border-radius:10px;font-size:10px;font-weight:700;padding:1px 5px;line-height:1.4}
-.icon-btn{background:transparent;border:none;color:var(--muted);display:flex;align-items:center;padding:6px;border-radius:6px;position:relative;transition:color .12s}
-.icon-btn:hover{color:var(--text)}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased}
+button{font-family:var(--sans);cursor:pointer}input,textarea,select{font-family:var(--sans)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px}
+.shell{display:flex;height:100vh;overflow:hidden}.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}.content-area{flex:1;display:flex;overflow:hidden}.page-body{flex:1;overflow-y:auto;overflow-x:hidden;min-width:0}
+.sidebar{width:var(--nav);background:var(--surface);border-right:1px solid var(--b1);display:flex;flex-direction:column;flex-shrink:0}
+.logo-wrap{padding:14px 18px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:10px}
+.logo-sx{width:34px;height:34px;background:var(--blue);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;letter-spacing:-.5px;flex-shrink:0}
+.nav-body{flex:1;padding:10px 0;overflow-y:auto}
+.nav-sec{padding:8px 16px 4px;font-size:10px;color:var(--dim);letter-spacing:.08em;font-weight:600;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 16px;background:transparent;border:none;border-left:2px solid transparent;color:var(--muted);font-size:13px;font-weight:400;transition:all .12s;text-align:left;border-radius:0 5px 5px 0}
+.nav-item:hover{background:var(--hover);color:var(--text)}.nav-item.active{background:rgba(46,134,171,.13);border-left-color:var(--accent);color:var(--accent);font-weight:500}
+.nav-icon{width:15px;height:15px;flex-shrink:0;opacity:.7}.nav-item.active .nav-icon{opacity:1}
+.nav-div{height:1px;background:var(--b1);margin:5px 0}
+.sidebar-foot{padding:12px 16px;border-top:1px solid var(--b1);display:flex;align-items:center;gap:10px}
+.hdr{height:var(--hdr);background:var(--surface);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0}
+.hdr-title{font-size:15px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.searchbar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--b1);border-radius:8px;padding:6px 12px;width:260px}
+.searchbar input{border:none;background:transparent;color:var(--text);font-size:13px;outline:none;width:100%}
+.searchbar input::placeholder{color:var(--dim)}
+.zed-btn{display:flex;align-items:center;gap:8px;background:rgba(123,47,190,.18);border:1px solid rgba(123,47,190,.38);border-radius:8px;padding:7px 14px;color:var(--zl);font-size:13px;font-weight:600}
+.nbadge{background:var(--red);color:#fff;border-radius:10px;font-size:10px;font-weight:700;padding:1px 5px;line-height:1.4}
+.icon-btn{background:transparent;border:none;color:var(--muted);display:flex;align-items:center;padding:6px;border-radius:6px;position:relative}
 .bell-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--red);border:2px solid var(--surface)}
-.presence-stack{display:flex;align-items:center;gap:4px}
-.online-label{font-size:11px;color:var(--green);display:flex;align-items:center;gap:4px;margin-left:3px;white-space:nowrap}
 .online-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block}
-
-/* ── Avatars ── */
-.av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0;font-size:11px;line-height:1}
-
-/* ── Badges ── */
-.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;letter-spacing:.04em;text-transform:uppercase;line-height:1.6;white-space:nowrap}
-.b-accent{background:rgba(46,134,171,.18);color:var(--accent)}
-.b-green{background:rgba(16,185,129,.15);color:var(--green)}
-.b-red{background:rgba(239,68,68,.18);color:var(--red)}
-.b-amber{background:rgba(245,158,11,.18);color:var(--amber)}
-.b-purple{background:rgba(123,47,190,.2);color:var(--zl)}
-.b-muted{background:rgba(136,146,164,.12);color:var(--muted)}
-.b-sm{font-size:9px;padding:1px 5px;border-radius:3px}
-
-/* ── Cards ── */
-.card{background:var(--card);border:1px solid var(--b1);border-radius:10px;padding:15px 16px}
-.card-lbl{font-size:10px;color:var(--dim);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:11px}
-
-/* ── Metric card ── */
-.metric{background:var(--card);border:1px solid var(--b1);border-radius:10px;padding:15px 16px}
-.m-lbl{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}
-.m-val{font-size:26px;font-weight:700;letter-spacing:-.5px;line-height:1.1}
-.m-delta{font-size:11px;margin-top:5px}
-.up{color:var(--green)} .dn{color:var(--red)}
-
-/* ── Layout grids ── */
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-/* ── Progress ── */
-.prog-track{height:8px;background:var(--b1);border-radius:4px;overflow:hidden}
-.prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--green))}
-
-/* ── Toolbar ── */
-.toolbar{display:flex;align-items:center;gap:10px;padding:11px 20px;border-bottom:1px solid var(--b1);background:var(--surface);flex-shrink:0;flex-wrap:wrap}
-
-/* ── Filter pills ── */
-.pill{padding:5px 12px;border-radius:7px;border:1px solid var(--b1);background:transparent;color:var(--muted);font-size:12px;font-weight:500;transition:all .12s}
-.pill:hover{border-color:var(--b2);color:var(--text)}
-.pill.on{border-color:var(--accent);background:rgba(46,134,171,.13);color:var(--accent)}
-
-/* ── Buttons ── */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:500;border:1px solid var(--b1);background:transparent;color:var(--text);transition:all .12s}
-.btn:hover{background:var(--hover);border-color:var(--b2)}
-.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-.btn-primary:hover{background:#2474a0;border-color:#2474a0}
-.btn-sm{padding:4px 10px;font-size:11px;border-radius:6px}
-.btn-ghost{border:none;background:transparent;color:var(--muted)}
-.btn-ghost:hover{color:var(--text);background:transparent}
-
-/* ── Table ── */
-.tbl-hdr{display:grid;padding:8px 20px;border-bottom:1px solid var(--b1);background:var(--surface);flex-shrink:0}
-.tbl-hdr span{font-size:10px;color:var(--dim);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.tbl-row{display:grid;padding:11px 20px;border-bottom:1px solid var(--b1);cursor:pointer;transition:background .1s;align-items:center}
-.tbl-row:hover{background:var(--hover)}
-
-/* ── Info rows ── */
-.info-r{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--b1);font-size:12px}
-.info-r:last-child{border-bottom:none}
-.il{color:var(--muted)} .iv{color:var(--text)}
-
-/* ── Tabs ── */
-.tab-bar{display:flex;border-bottom:1px solid var(--b1);padding:0 20px}
-.tab{padding:9px 14px;border:none;background:transparent;border-bottom:2px solid transparent;color:var(--muted);font-size:13px;font-weight:400;transition:all .12s}
-.tab:hover{color:var(--text)}
-.tab.on{border-bottom-color:var(--accent);color:var(--accent);font-weight:600}
-
-/* ── Company record ── */
-.co-wrap{display:flex;height:100%;overflow:hidden}
-.co-main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
-.co-tl{width:308px;border-left:1px solid var(--b1);background:var(--surface);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
-
-/* ── Timeline ── */
-.tl-wrap{flex:1;overflow-y:auto;padding:13px 14px}
-.tl-entry{display:flex;gap:11px;padding-bottom:15px;position:relative;padding-left:16px;margin-left:7px}
-.tl-entry::before{content:'';position:absolute;left:-1px;top:16px;width:1px;bottom:0;background:var(--b1)}
-.tl-entry:last-child::before{display:none}
-.tl-dot{position:absolute;left:-7px;top:3px;width:14px;height:14px;border-radius:50%;background:var(--card);border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center}
-.tl-pip{width:5px;height:5px;border-radius:50%;background:currentColor}
-
-/* ── ZED Panel ── */
+.av{border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;letter-spacing:.04em;text-transform:uppercase;line-height:1.6;white-space:nowrap}
+.b-accent{background:rgba(46,134,171,.18);color:var(--accent)}.b-green{background:rgba(16,185,129,.12);color:var(--green)}.b-red{background:rgba(239,68,68,.12);color:var(--red)}.b-amber{background:rgba(245,158,11,.12);color:var(--amber)}.b-purple{background:rgba(123,47,190,.2);color:var(--zl)}.b-muted{background:rgba(136,146,164,.12);color:var(--muted)}.b-sm{font-size:9px;padding:1px 5px}
+.card{background:var(--card);border:1px solid var(--b1);border-radius:10px;padding:15px 16px}.card-lbl{font-size:10px;color:var(--dim);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+.metric{background:var(--card);border:1px solid var(--b1);border-radius:10px;padding:14px 16px}.m-lbl{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}.m-val{font-size:26px;font-weight:700;letter-spacing:-.5px;line-height:1.1}.m-d{font-size:11px;margin-top:4px}.up{color:var(--green)}.dn{color:var(--red)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.prog{height:8px;background:var(--b1);border-radius:4px;overflow:hidden}.prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--green))}
+.toolbar{display:flex;align-items:center;gap:9px;padding:10px 20px;border-bottom:1px solid var(--b1);background:var(--surface);flex-shrink:0;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:500;border:1px solid var(--b1);background:transparent;color:var(--text);transition:all .12s}
+.btn:hover{background:var(--hover)}.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}.btn-sm{padding:4px 10px;font-size:11px;border-radius:5px}.btn-ghost{border:none;background:transparent;color:var(--muted);padding:4px}
+.pill{padding:5px 11px;border-radius:7px;border:1px solid var(--b1);background:transparent;color:var(--muted);font-size:12px;font-weight:500;transition:all .12s}.pill.on{border-color:var(--accent);background:rgba(46,134,171,.13);color:var(--accent)}
+.tbl-hdr{display:grid;padding:8px 20px;border-bottom:1px solid var(--b1);background:var(--surface);flex-shrink:0}.tbl-hdr span{font-size:10px;color:var(--dim);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.tbl-row{display:grid;padding:10px 20px;border-bottom:1px solid var(--b1);cursor:pointer;transition:background .1s;align-items:center}.tbl-row:hover{background:var(--hover)}
+.tbl-foot{padding:9px 20px;border-top:1px solid var(--b1);font-size:11px;color:var(--dim);display:flex;justify-content:space-between;flex-shrink:0}
+.ir{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--b1);font-size:12px}.ir:last-child{border-bottom:none}.il{color:var(--muted)}.iv{color:var(--text)}
+.tab-bar{display:flex;border-bottom:1px solid var(--b1);padding:0 20px;flex-shrink:0}
+.tab{padding:8px 13px;border:none;background:transparent;border-bottom:2px solid transparent;color:var(--muted);font-size:12px;font-weight:400;transition:all .12s}.tab.on{border-bottom-color:var(--accent);color:var(--accent);font-weight:600}
+.co-wrap{display:flex;height:100%;overflow:hidden}.co-main{flex:1;overflow-y:auto;display:flex;flex-direction:column}.co-tl{width:300px;border-left:1px solid var(--b1);background:var(--surface);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+.tl-wrap{flex:1;overflow-y:auto;padding:12px 13px}
+.tl-entry{display:flex;gap:10px;padding-bottom:14px;position:relative;padding-left:15px;margin-left:7px}
+.tl-entry::before{content:'';position:absolute;left:-1px;top:15px;width:1px;bottom:0;background:var(--b1)}.tl-entry:last-child::before{display:none}
+.tl-dot{position:absolute;left:-7px;top:3px;width:13px;height:13px;border-radius:50%;background:var(--card);border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center}.tl-pip{width:5px;height:5px;border-radius:50%;background:currentColor}
 .zed-panel{width:var(--zw);background:var(--zbg);border-left:1px solid rgba(123,47,190,.28);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
-.zed-hdr{padding:14px 15px;border-bottom:1px solid rgba(123,47,190,.2);display:flex;align-items:center;gap:11px;flex-shrink:0}
-.zed-mark{width:33px;height:33px;border-radius:8px;background:rgba(123,47,190,.28);border:1px solid rgba(123,47,190,.45);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.zed-sec{padding:12px 14px;border-bottom:1px solid rgba(123,47,190,.12);flex-shrink:0}
-.zed-sec.scroll{flex:1;overflow-y:auto;border-bottom:none}
-.zed-lbl{font-size:10px;color:var(--zl);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:9px}
-.zed-need{background:rgba(123,47,190,.09);border:1px solid rgba(123,47,190,.18);border-radius:8px;padding:10px 11px;margin-bottom:8px}
-.zed-need:last-child{margin-bottom:0}
-.zed-need.high{border-left:3px solid var(--red)}
-.zed-need.med{border-left:3px solid var(--amber)}
-.zed-need.low{border-left:3px solid var(--dim)}
-.zed-disc{font-size:10px;color:var(--dim);padding:9px 14px;border-top:1px solid var(--b1);line-height:1.5;flex-shrink:0}
-
-/* ── Input ── */
-.inp{background:var(--card);border:1px solid var(--b1);border-radius:7px;padding:7px 12px;color:var(--text);font-size:13px;outline:none;width:100%;transition:border-color .15s}
-.inp:focus{border-color:var(--accent)}
-.inp::placeholder{color:var(--dim)}
-textarea.inp{resize:none;line-height:1.5}
-
-/* ── Note form ── */
-.note-form{display:none;padding:11px 14px;border-bottom:1px solid var(--b1);background:var(--card);flex-shrink:0}
-.note-form.show{display:block}
-
-/* ── Placeholder screen ── */
-.ph{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:40px}
-.ph-icon{width:68px;height:68px;border-radius:18px;background:rgba(46,134,171,.1);border:1px solid rgba(46,134,171,.2);display:flex;align-items:center;justify-content:center}
-
-/* ── Powered by ── */
-.powered{font-size:10px;color:var(--dim);letter-spacing:.06em;text-align:center;margin-top:22px}
-
-/* ── Intro banner ── */
-.intro-banner{background:linear-gradient(135deg,rgba(27,58,107,.6),rgba(123,47,190,.3));border:1px solid rgba(46,134,171,.3);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.zed-hdr{padding:13px 15px;border-bottom:1px solid rgba(123,47,190,.2);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.zed-mark{width:32px;height:32px;border-radius:8px;background:rgba(123,47,190,.28);border:1px solid rgba(123,47,190,.45);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.zed-sec{padding:11px 13px;border-bottom:1px solid rgba(123,47,190,.1);flex-shrink:0}.zed-sec.scroll{flex:1;overflow-y:auto;border-bottom:none}
+.zed-lbl{font-size:10px;color:var(--zl);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
+.zed-need{background:rgba(123,47,190,.09);border:1px solid rgba(123,47,190,.18);border-radius:8px;padding:9px 10px;margin-bottom:7px}.zed-need:last-child{margin-bottom:0}
+.zed-need.high{border-left:3px solid var(--red)}.zed-need.med{border-left:3px solid var(--amber)}.zed-need.low{border-left:3px solid var(--dim)}
+.zed-disc{font-size:10px;color:var(--dim);padding:8px 13px;border-top:1px solid var(--b1);line-height:1.5;flex-shrink:0}
+.inp{background:var(--card);border:1px solid var(--b1);border-radius:7px;padding:7px 11px;color:var(--text);font-size:13px;outline:none;width:100%;transition:border-color .15s}
+.inp:focus{border-color:var(--accent)}.inp::placeholder{color:var(--dim)}textarea.inp{resize:none;line-height:1.5}select.inp{cursor:pointer}
+.note-form{display:none;padding:10px 13px;border-bottom:1px solid var(--b1);background:var(--card);flex-shrink:0}.note-form.show{display:block}
+.powered{font-size:10px;color:var(--dim);text-align:center;margin-top:20px;letter-spacing:.05em}
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sec-title{font-size:13px;font-weight:600}
+.intro{background:linear-gradient(135deg,rgba(27,58,107,.5),rgba(123,47,190,.25));border:1px solid rgba(46,134,171,.25);border-radius:10px;padding:15px 18px;margin-bottom:18px;display:flex;align-items:center;gap:13px}
 </style>
 </head>
 <body>
-
 <div class="shell">
-
-<!-- ════════════════ SIDEBAR ════════════════ -->
 <nav class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-sx">SX</div>
-    <div>
-      <div class="logo-name">STRUCZ</div>
-      <div class="logo-sub">ZD Integrated Circuits</div>
-    </div>
+  <div class="logo-wrap"><div class="logo-sx">SX</div><div><div style="font-weight:700;font-size:15px;letter-spacing:-.3px;line-height:1.15">STRUCZ</div><div style="font-size:10px;color:var(--muted)">ZD Integrated Circuits</div></div></div>
+  <div class="nav-body">
+    <div class="nav-sec">Workspace</div>
+    <button class="nav-item" id="nav-dashboard" onclick="goPage('dashboard')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</button>
+    <button class="nav-item active" id="nav-contacts" onclick="goPage('contacts')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Contacts</button>
+    <button class="nav-item" id="nav-requirements" onclick="goPage('requirements')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>Requirements</button>
+    <button class="nav-item" id="nav-quotes" onclick="goPage('quotes')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>Quotes</button>
+    <button class="nav-item" id="nav-orders" onclick="goPage('orders')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Sales Orders</button>
+    <button class="nav-item" id="nav-purchasing" onclick="goPage('purchasing')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>Purchase Orders</button>
+    <button class="nav-item" id="nav-inventory" onclick="goPage('inventory')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Inventory</button>
+    <button class="nav-item" id="nav-invoices" onclick="goPage('invoices')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Invoicing</button>
+    <button class="nav-item" id="nav-rma" onclick="goPage('rma')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>RMA</button>
+    <button class="nav-item" id="nav-offers" onclick="goPage('offers')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 10.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.32 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91A16 16 0 0016.8 17.8l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Offers</button>
+    <div class="nav-div"></div>
+    <button class="nav-item" id="nav-settings" onclick="goPage('settings')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Settings</button>
   </div>
-
-  <div style="flex:1;overflow-y:auto;padding:10px 0;">
-    <div class="nav-section">Workspace</div>
-
-    <button class="nav-item" id="nav-dashboard" onclick="goPage('dashboard')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Dashboard
-    </button>
-
-    <button class="nav-item active" id="nav-contacts" onclick="goPage('contacts')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      Contacts
-    </button>
-
-    <button class="nav-item" id="nav-requirements" onclick="goPage('requirements')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
-      Requirements
-    </button>
-
-    <button class="nav-item" id="nav-quotes" onclick="goPage('quotes')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-      Quotes
-    </button>
-
-    <button class="nav-item" id="nav-orders" onclick="goPage('orders')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      Sales Orders
-    </button>
-
-    <button class="nav-item" id="nav-purchasing" onclick="goPage('purchasing')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-      Purchase Orders
-    </button>
-
-    <button class="nav-item" id="nav-inventory" onclick="goPage('inventory')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-      Inventory
-    </button>
-
-    <button class="nav-item" id="nav-invoices" onclick="goPage('invoices')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      Invoicing
-    </button>
-
-    <button class="nav-item" id="nav-rma" onclick="goPage('rma')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
-      RMA
-    </button>
-
-    <button class="nav-item" id="nav-offers" onclick="goPage('offers')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 10.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.32 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91A16 16 0 0016.8 17.8l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-      Offers
-    </button>
-
-    <div class="nav-divider"></div>
-
-    <button class="nav-item" id="nav-settings" onclick="goPage('settings')">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-      Settings
-    </button>
-  </div>
-
-  <div class="sidebar-footer">
-    <div class="av" style="width:31px;height:31px;background:rgba(46,134,171,.22);border:1px solid rgba(46,134,171,.4);color:var(--accent);font-size:11px;font-weight:700;">CZ</div>
-    <div style="flex:1;min-width:0;">
-      <div style="font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Craig Zurman</div>
-      <div style="font-size:11px;color:var(--muted);">CEO · ZDI</div>
-    </div>
+  <div class="sidebar-foot">
+    <div class="av" style="width:30px;height:30px;background:rgba(46,134,171,.22);border:1px solid rgba(46,134,171,.4);color:var(--accent);font-size:11px">CZ</div>
+    <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Craig Zurman</div><div style="font-size:11px;color:var(--muted)">CEO · ZDI</div></div>
   </div>
 </nav>
-
-<!-- ════════════════ MAIN ════════════════ -->
 <div class="main">
-
-  <!-- Header -->
-  <header class="header">
-    <span class="header-title" id="hdr-title">Contact Manager</span>
-
-    <div class="search-bar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input placeholder="Search companies, parts, orders… ⌘K" id="global-search">
+  <header class="hdr">
+    <span class="hdr-title" id="hdr-title">Contact Manager</span>
+    <div class="searchbar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Search companies, parts, orders… ⌘K"></div>
+    <button class="zed-btn" onclick="toggleZed()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>ZED <span class="nbadge">3</span></button>
+    <div style="display:flex;align-items:center;gap:4px">
+      <div class="av" style="width:27px;height:27px;background:rgba(46,134,171,.22);border:1px solid rgba(46,134,171,.4);color:var(--accent);font-size:10px" title="Craig Zurman">CZ</div>
+      <div class="av" style="width:27px;height:27px;background:rgba(74,85,104,.25);border:1px solid rgba(74,85,104,.4);color:var(--muted);font-size:10px" title="Lisa Petrov">LP</div>
+      <div class="av" style="width:27px;height:27px;background:rgba(74,85,104,.25);border:1px solid rgba(74,85,104,.4);color:var(--muted);font-size:10px" title="Mike Ruiz">MR</div>
+      <div class="av" style="width:27px;height:27px;background:rgba(74,85,104,.25);border:1px solid rgba(74,85,104,.4);color:var(--muted);font-size:10px" title="Jake Burns">JB</div>
+      <span style="font-size:11px;color:var(--green);display:flex;align-items:center;gap:3px;margin-left:3px;white-space:nowrap"><span class="online-dot"></span>4 online</span>
     </div>
-
-    <button class="zed-btn" onclick="toggleZed()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-      ZED <span class="notif-badge" id="zed-count">3</span>
-    </button>
-
-    <div class="presence-stack">
-      <div class="av" style="width:28px;height:28px;background:rgba(46,134,171,.22);border:1px solid rgba(46,134,171,.4);color:var(--accent);" title="Craig Zurman — Online">CZ</div>
-      <div class="av" style="width:28px;height:28px;background:rgba(74,85,104,.28);border:1px solid rgba(74,85,104,.4);color:var(--muted);" title="Lisa Petrov — Online">LP</div>
-      <div class="av" style="width:28px;height:28px;background:rgba(74,85,104,.28);border:1px solid rgba(74,85,104,.4);color:var(--muted);" title="Mike Ruiz — Online">MR</div>
-      <div class="av" style="width:28px;height:28px;background:rgba(74,85,104,.28);border:1px solid rgba(74,85,104,.4);color:var(--muted);" title="Jake Burns — Online">JB</div>
-      <span class="online-label"><span class="online-dot"></span> 4 online</span>
-    </div>
-
-    <button class="icon-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-      <span class="bell-dot"></span>
-    </button>
+    <button class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg><span class="bell-dot"></span></button>
   </header>
-
-  <!-- Page + ZED panel -->
-  <div class="content-area">
-    <div class="page-body" id="page-body"></div>
-    <div id="zed-slot"></div>
-  </div>
+  <div class="content-area"><div class="page-body" id="page-body"></div><div id="zed-slot"></div></div>
 </div>
-
-</div><!-- /shell -->
-
+</div>
 <script>
-// ══════════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════════
-const COMPANIES = [
-  {id:1,name:'Acme Electronics Corp',type:'Customer',cls:'OEM',city:'San Jose',state:'CA',rep:'CZ',lastOrder:'2024-11-15',gp:142500,crs:82,creditHold:false,eraHold:false,status:'Active',phone:'(408) 555-0142',site:'acmeelectronics.com'},
-  {id:2,name:'Beta Components Ltd',type:'Vendor',cls:'Distributor',city:'Austin',state:'TX',rep:'LP',lastOrder:'2024-10-02',gp:89200,crs:61,creditHold:false,eraHold:false,status:'Active',phone:'(512) 555-0237',site:'betacomponents.com'},
-  {id:3,name:'Nexus Semiconductor',type:'Both',cls:'OEM',city:'Boston',state:'MA',rep:'CZ',lastOrder:'2024-09-18',gp:234800,crs:91,creditHold:false,eraHold:false,status:'Active',phone:'(617) 555-0318',site:'nexussemi.com'},
-  {id:4,name:'GlobalTech Industries',type:'Customer',cls:'CEM',city:'Dallas',state:'TX',rep:'MR',lastOrder:'2024-08-05',gp:67400,crs:44,creditHold:true,eraHold:false,status:'On Hold',phone:'(972) 555-0441',site:'globaltechindustries.com'},
-  {id:5,name:'Pacific Rim Supply Co',type:'Vendor',cls:'Broker',city:'Seattle',state:'WA',rep:'LP',lastOrder:'2024-11-01',gp:51200,crs:58,creditHold:false,eraHold:true,status:'Active',phone:'(206) 555-0521',site:'pacificrimsupply.com'},
-  {id:6,name:'Meridian Systems Inc',type:'Customer',cls:'OEM',city:'Chicago',state:'IL',rep:'CZ',lastOrder:'2024-11-20',gp:312000,crs:95,creditHold:false,eraHold:false,status:'Active',phone:'(312) 555-0612',site:'meridiansystems.com'},
-  {id:7,name:'Apex Devices LLC',type:'Customer',cls:'Distributor',city:'Phoenix',state:'AZ',rep:'MR',lastOrder:'2024-07-14',gp:28900,crs:31,creditHold:false,eraHold:false,status:'Inactive',phone:'(602) 555-0714',site:'apexdevices.com'},
-  {id:8,name:'TechSource International',type:'Vendor',cls:'Broker',city:'Miami',state:'FL',rep:'LP',lastOrder:'2024-10-28',gp:78600,crs:69,creditHold:false,eraHold:false,status:'Active',phone:'(305) 555-0828',site:'techsourceintl.com'},
-];
-
-const CONTACTS = {
-  1:[{fn:'Jane',ln:'Doe',title:'VP Procurement',email:'j.doe@acmeelectronics.com',primary:true},
-     {fn:'Robert',ln:'Chen',title:'Senior Buyer',email:'r.chen@acmeelectronics.com',primary:false}],
-  3:[{fn:'Sarah',ln:'Mitchell',title:'Director, Supply Chain',email:'s.mitchell@nexussemi.com',primary:true}],
-  6:[{fn:'Tom',ln:'Bradley',title:'EVP Operations',email:'t.bradley@meridiansystems.com',primary:true},
-     {fn:'Lisa',ln:'Nguyen',title:'Procurement Manager',email:'l.nguyen@meridiansystems.com',primary:false}],
-};
-
-const TIMELINE = {
-  1:[
-    {zed:true, actor:'ZED',time:'2 hours ago',text:'Revival email sent to Jane Doe — Q1 2025 TMS320 availability inquiry. Sent via Sent.dm → WhatsApp delivery.'},
-    {zed:false,actor:'Craig Zurman',time:'Yesterday 3:14 PM',text:'Spoke to Jane — strong interest in 50K units TI TMS320F28335. Call back next week to discuss Q1 pricing. High potential.'},
-    {zed:false,actor:'Craig Zurman',time:'3 days ago',text:'Quote #4821 created — $84,500 — TMS320F28335PTPT × 2,500 units @ $33.80 each. Sent to Jane Doe.'},
-    {zed:true, actor:'ZED',time:'1 week ago',text:'Market Intelligence (IRS: Critical): TI TMS320 lead times extending to 52 weeks per Octopart data. Acme has 3 open reqs on this device.'},
-    {zed:false,actor:'System',time:'2 weeks ago',text:'Invoice #3891 marked PAID — $42,200 received. Synced from QuickBooks. GP locked: $8,440 (20.0%)'},
-    {zed:false,actor:'Craig Zurman',time:'3 weeks ago',text:'SO #2847 shipped — STM32F407VGT6 × 1,000 units via FedEx Priority. Tracking: 776-123-456789'},
+const C={
+  companies:[
+    {id:1,name:'Acme Electronics Corp',type:'Customer',cls:'OEM',city:'San Jose',state:'CA',rep:'CZ',lastOrder:'2024-11-15',gp:142500,crs:82,creditHold:false,eraHold:false,status:'Active',phone:'(408) 555-0142',site:'acmeelectronics.com'},
+    {id:2,name:'Beta Components Ltd',type:'Vendor',cls:'Distributor',city:'Austin',state:'TX',rep:'LP',lastOrder:'2024-10-02',gp:89200,crs:61,creditHold:false,eraHold:false,status:'Active',phone:'(512) 555-0237',site:'betacomponents.com'},
+    {id:3,name:'Nexus Semiconductor',type:'Both',cls:'OEM',city:'Boston',state:'MA',rep:'CZ',lastOrder:'2024-09-18',gp:234800,crs:91,creditHold:false,eraHold:false,status:'Active',phone:'(617) 555-0318',site:'nexussemi.com'},
+    {id:4,name:'GlobalTech Industries',type:'Customer',cls:'CEM',city:'Dallas',state:'TX',rep:'MR',lastOrder:'2024-08-05',gp:67400,crs:44,creditHold:true,eraHold:false,status:'On Hold',phone:'(972) 555-0441',site:'globaltechindustries.com'},
+    {id:5,name:'Pacific Rim Supply Co',type:'Vendor',cls:'Broker',city:'Seattle',state:'WA',rep:'LP',lastOrder:'2024-11-01',gp:51200,crs:58,creditHold:false,eraHold:true,status:'Active',phone:'(206) 555-0521',site:'pacificrimsupply.com'},
+    {id:6,name:'Meridian Systems Inc',type:'Customer',cls:'OEM',city:'Chicago',state:'IL',rep:'CZ',lastOrder:'2024-11-20',gp:312000,crs:95,creditHold:false,eraHold:false,status:'Active',phone:'(312) 555-0612',site:'meridiansystems.com'},
+    {id:7,name:'Apex Devices LLC',type:'Customer',cls:'Distributor',city:'Phoenix',state:'AZ',rep:'MR',lastOrder:'2024-07-14',gp:28900,crs:31,creditHold:false,eraHold:false,status:'Inactive',phone:'(602) 555-0714',site:'apexdevices.com'},
+    {id:8,name:'TechSource International',type:'Vendor',cls:'Broker',city:'Miami',state:'FL',rep:'LP',lastOrder:'2024-10-28',gp:78600,crs:69,creditHold:false,eraHold:false,status:'Active',phone:'(305) 555-0828',site:'techsourceintl.com'},
+  ],
+  contacts:{
+    1:[{fn:'Jane',ln:'Doe',title:'VP Procurement',email:'j.doe@acmeelectronics.com',primary:true},{fn:'Robert',ln:'Chen',title:'Senior Buyer',email:'r.chen@acmeelectronics.com',primary:false}],
+    3:[{fn:'Sarah',ln:'Mitchell',title:'Director, Supply Chain',email:'s.mitchell@nexussemi.com',primary:true}],
+    6:[{fn:'Tom',ln:'Bradley',title:'EVP Operations',email:'t.bradley@meridiansystems.com',primary:true},{fn:'Lisa',ln:'Nguyen',title:'Procurement Manager',email:'l.nguyen@meridiansystems.com',primary:false}],
+  },
+  timeline:{
+    1:[
+      {zed:true,actor:'ZED',time:'2 hrs ago',text:'Revival email sent to Jane Doe — Q1 2025 TMS320 availability. Delivered via WhatsApp (Sent.dm).'},
+      {zed:false,actor:'Craig Zurman',time:'Yesterday 3:14 PM',text:'Spoke to Jane — strong interest in 50K units TI TMS320F28335. Call back next week re Q1 pricing.'},
+      {zed:false,actor:'Craig Zurman',time:'3 days ago',text:'Quote #4821 created — $84,500 — TMS320F28335PTPT x 2,500 units @ $33.80. Sent to Jane Doe.'},
+      {zed:true,actor:'ZED',time:'1 week ago',text:'Market Alert (IRS: Critical): TI TMS320 lead times extending to 52 weeks per Octopart. Acme has 3 open reqs.'},
+      {zed:false,actor:'System',time:'2 weeks ago',text:'Invoice #3891 PAID — $42,200 received. Synced from QuickBooks. GP locked: $8,440 (20.0%)'},
+      {zed:false,actor:'Craig Zurman',time:'3 weeks ago',text:'SO #2847 shipped — STM32F407VGT6 x 1,000 via FedEx Priority. Tracking: 776-123-456789'},
+    ],
+  },
+  reqs:[
+    {id:'R-8841',part:'TMS320F28335PTPT',mfr:'Texas Instruments',qty:2500,target:'$33.50',cond:'New',rep:'CZ',date:'Today 9:14 AM',hot:true,worked:''},
+    {id:'R-8840',part:'STM32H743IIT6',mfr:'STMicroelectronics',qty:500,target:'$18.00',cond:'New',rep:'MR',date:'Today 8:52 AM',hot:false,worked:''},
+    {id:'R-8839',part:'ATSAME70Q21B-AN',mfr:'Microchip Technology',qty:1000,target:'$12.50',cond:'New',rep:'LP',date:'Yesterday',hot:true,worked:'Q'},
+    {id:'R-8838',part:'XC7A200T-2FBG676C',mfr:'Xilinx / AMD',qty:50,target:'$185.00',cond:'New',rep:'CZ',date:'Yesterday',hot:false,worked:''},
+    {id:'R-8837',part:'ADSP-21489BSWZ-4A',mfr:'Analog Devices',qty:200,target:'$42.00',cond:'New',rep:'MR',date:'2 days ago',hot:false,worked:'N'},
+    {id:'R-8836',part:'LPC1768FBD100',mfr:'NXP Semiconductors',qty:750,target:'$8.25',cond:'New',rep:'LP',date:'2 days ago',hot:false,worked:''},
+    {id:'R-8835',part:'PIC32MX795F512L',mfr:'Microchip Technology',qty:300,target:'$11.00',cond:'New',rep:'CZ',date:'3 days ago',hot:true,worked:''},
+  ],
+  quotes:[
+    {id:'Q-4821',co:'Acme Electronics Corp',parts:'TMS320F28335PTPT x 2,500',total:84500,gp:16.8,status:'Sent',auth1:'CZ',auth2:'MR',rep:'CZ',date:'3 days ago'},
+    {id:'Q-4820',co:'Meridian Systems Inc',parts:'STM32H743IIT6 x 500',total:9200,gp:22.4,status:'Draft',auth1:'',auth2:'',rep:'CZ',date:'4 days ago'},
+    {id:'Q-4819',co:'Nexus Semiconductor',parts:'XC7A200T-2FBG676C x 50',total:9750,gp:18.2,status:'Won',auth1:'CZ',auth2:'LP',rep:'CZ',date:'1 week ago'},
+    {id:'Q-4818',co:'GlobalTech Industries',parts:'LPC1768FBD100 x 750',total:6375,gp:14.5,status:'Lost',auth1:'CZ',auth2:'MR',rep:'MR',date:'1 week ago'},
+    {id:'Q-4817',co:'Acme Electronics Corp',parts:'STM32F407VGT6 x 1,000',total:42200,gp:20.0,status:'Won',auth1:'CZ',auth2:'MR',rep:'CZ',date:'2 weeks ago'},
+  ],
+  sos:[
+    {id:'SO-2851',co:'Meridian Systems Inc',part:'STM32H743IIT6 x 500',total:9200,status:'On Order',ship:'2025-01-15',rep:'CZ',inspect:false,funds:true},
+    {id:'SO-2850',co:'Acme Electronics Corp',part:'TMS320F28335PTPT x 1,000',total:33800,status:'Backordered',ship:'2025-01-08',rep:'CZ',inspect:true,funds:false},
+    {id:'SO-2849',co:'Nexus Semiconductor',part:'XC7A200T-2FBG676C x 50',total:9750,status:'Received',ship:'2024-12-20',rep:'CZ',inspect:true,funds:true},
+    {id:'SO-2848',co:'GlobalTech Industries',part:'PIC32MX795F512L x 300',total:3450,status:'Invoiced',ship:'2024-12-15',rep:'MR',inspect:false,funds:true},
+    {id:'SO-2847',co:'Acme Electronics Corp',part:'STM32F407VGT6 x 1,000',total:42200,status:'Invoiced',ship:'2024-11-28',rep:'CZ',inspect:false,funds:true},
+  ],
+  pos:[
+    {id:'PO-1891',vendor:'Beta Components Ltd',part:'TMS320F28335PTPT x 1,000',cost:24500,deal:'Brokered Deal',status:'Confirmed',so:'SO-2850',rep:'LP'},
+    {id:'PO-1890',vendor:'Pacific Rim Supply Co',part:'STM32H743IIT6 x 500',cost:7800,deal:'Brokered Deal',status:'Unconfirmed',so:'SO-2851',rep:'LP'},
+    {id:'PO-1889',vendor:'TechSource International',part:'XC7A200T-2FBG676C x 100',cost:15000,deal:'Stock Buy',status:'Received',so:'',rep:'CZ'},
+    {id:'PO-1888',vendor:'Beta Components Ltd',part:'ADSP-21489BSWZ-4A x 500',cost:18000,deal:'Excess Bid',status:'Confirmed',so:'',rep:'LP'},
+    {id:'PO-1887',vendor:'Pacific Rim Supply Co',part:'LPC1768FBD100 x 2,000',cost:12400,deal:'Lot Buy',status:'Received',so:'',rep:'MR'},
+  ],
+  inv:[
+    {id:'INV-4421',part:'XC7A200T-2FBG676C',mfr:'Xilinx / AMD',qty:100,avail:50,cond:'New',pkg:'BGA',cost:150.00,dc:'2023',loc:'A-12'},
+    {id:'INV-4420',part:'ADSP-21489BSWZ-4A',mfr:'Analog Devices',qty:500,avail:500,cond:'New',pkg:'BGA',cost:36.00,dc:'2022',loc:'B-04'},
+    {id:'INV-4419',part:'LPC1768FBD100',mfr:'NXP Semiconductors',qty:2000,avail:1250,cond:'New',pkg:'LQFP',cost:6.20,dc:'2023',loc:'C-08'},
+    {id:'INV-4418',part:'PIC32MX795F512L',mfr:'Microchip Technology',qty:750,avail:450,cond:'New',pkg:'LQFP',cost:9.50,dc:'2024',loc:'C-11'},
+    {id:'INV-4417',part:'STM32F407VGT6',mfr:'STMicroelectronics',qty:200,avail:200,cond:'Excess',pkg:'LQFP',cost:8.40,dc:'2022',loc:'D-02'},
+  ],
+  invs:[
+    {id:'INV-8901',co:'Meridian Systems Inc',so:'SO-2849',amount:9750,gp:22.4,status:'Open',due:'2025-01-20',rep:'CZ'},
+    {id:'INV-8900',co:'GlobalTech Industries',so:'SO-2848',amount:3450,gp:14.5,status:'Open',due:'2025-01-15',rep:'MR'},
+    {id:'INV-8899',co:'Acme Electronics Corp',so:'SO-2847',amount:42200,gp:20.0,status:'Paid',due:'2024-12-28',rep:'CZ'},
+    {id:'INV-8898',co:'Nexus Semiconductor',so:'SO-2845',amount:18600,gp:19.2,status:'Paid',due:'2024-12-15',rep:'CZ'},
+    {id:'INV-8897',co:'Acme Electronics Corp',so:'SO-2843',amount:8900,gp:17.8,status:'Overdue',due:'2024-12-01',rep:'CZ'},
+  ],
+  rmas:[
+    {id:'RMA-441',co:'Acme Electronics Corp',part:'STM32F103C8T6 x 50',reason:'Wrong Part Number',status:'Authorized',vendorRMA:'VR-8821',auth1:'CZ',auth2:'MR'},
+    {id:'RMA-440',co:'Nexus Semiconductor',part:'LPC1768FBD100 x 100',reason:'Non-Conforming — Wrong Date Code',status:'Pending Auth',vendorRMA:'',auth1:'CZ',auth2:''},
+    {id:'RMA-439',co:'GlobalTech Industries',part:'PIC16F877A x 200',reason:'Customer Cancelled',status:'Received',vendorRMA:'VR-8810',auth1:'CZ',auth2:'LP'},
+  ],
+  offers:[
+    {id:'OF-7821',vendor:'Beta Components Ltd',part:'TMS320F28335PTPT',qty:5000,price:24.50,cond:'New',source:'IC Source',match:'R-8841',date:'8 min ago',confirmed:false},
+    {id:'OF-7820',vendor:'Pacific Rim Supply Co',part:'STM32H743IIT6',qty:1000,price:16.80,cond:'New',source:'Broker Forum',match:'R-8840',date:'2 hrs ago',confirmed:false},
+    {id:'OF-7819',vendor:'TechSource International',part:'XC7A200T-2FBG676C',qty:200,price:148.00,cond:'New',source:'Email',match:'R-8838',date:'Yesterday',confirmed:true},
+    {id:'OF-7818',vendor:'Beta Components Ltd',part:'ADSP-21489BSWZ-4A',qty:500,price:38.50,cond:'New',source:'IC Source',match:'R-8837',date:'2 days ago',confirmed:true},
+  ],
+  zedNeeds:[
+    {p:'high',text:'Pacific Rim Supply replied to Hot Wanted broadcast — 5,000 units TMS320F28335 @ $24.50. Create offer and match to R-8841?',time:'8 min ago'},
+    {p:'med',text:'Acme Electronics responded to revival email. Jane Doe: "Interested in Q1 pricing for TMS320." Draft quote follow-up?',time:'2 hrs ago'},
+    {p:'low',text:'GlobalTech Industries CRS dropped to 44 — 120 days dormant. Recommend initiating revival email sequence?',time:'Yesterday'},
   ],
 };
 
-const REQS = [
-  {req:'R-8841',part:'TMS320F28335PTPT',mfr:'Texas Instruments',qty:2500,rep:'CZ',date:'Today 9:14 AM',hot:true},
-  {req:'R-8840',part:'STM32H743IIT6',mfr:'STMicroelectronics',qty:500,rep:'MR',date:'Today 8:52 AM',hot:false},
-  {req:'R-8839',part:'ATSAME70Q21B-AN',mfr:'Microchip Technology',qty:1000,rep:'LP',date:'Yesterday',hot:true},
-  {req:'R-8838',part:'XC7A200T-2FBG676C',mfr:'Xilinx / AMD',qty:50,rep:'CZ',date:'Yesterday',hot:false},
-  {req:'R-8837',part:'ADSP-21489BSWZ-4A',mfr:'Analog Devices',qty:200,rep:'MR',date:'2 days ago',hot:false},
-];
+let page='contacts',company=null,zedOpen=true,filter='All',search='',activeTab=0;
 
-const ZED_NEEDS = [
-  {p:'high',text:'Pacific Rim Supply replied to Hot Wanted broadcast — 5,000 units TMS320F28335 @ $24.50. Create offer and match to R-8841?',time:'8 min ago'},
-  {p:'med',text:'Acme Electronics responded to revival email. Jane Doe: "Interested in Q1 pricing for TMS320." Draft quote follow-up?',time:'2 hrs ago'},
-  {p:'low',text:'GlobalTech Industries CRS dropped to 44 — 120 days dormant. Recommend initiating revival email sequence?',time:'Yesterday'},
-];
+const fmtGP=n=>n>=1e6?`$${(n/1e6).toFixed(1)}M`:n>=1e3?`$${(n/1e3).toFixed(0)}K`:`$${n}`;
+const fmtFull=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+const fmtPct=n=>`${n.toFixed(1)}%`;
+const typeBadge=t=>t==='Customer'?'b-accent':t==='Vendor'?'b-muted':'b-green';
+const statusBadge=s=>s==='Active'?'b-green':s==='On Hold'||s==='Overdue'?'b-amber':'b-muted';
+const crsColor=c=>c>=70?'var(--green)':c>=40?'var(--amber)':'var(--red)';
+const tlColor=e=>e.zed?'var(--zl)':e.actor==='System'?'var(--green)':'var(--accent)';
+const soColor=s=>s==='Invoiced'?'var(--green)':s==='Backordered'?'var(--red)':s==='On Order'?'var(--amber)':s==='Received'?'var(--accent)':'var(--muted)';
+const poColor=s=>s==='Received'?'var(--green)':s==='Confirmed'?'var(--accent)':s==='Unconfirmed'?'var(--amber)':'var(--muted)';
+const invColor=s=>s==='Paid'?'var(--green)':s==='Overdue'?'var(--red)':'var(--amber)';
 
-// ══════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════
-let page = 'contacts';
-let company = null;
-let zedOpen = true;
-let filter = 'All';
-let search = '';
-let activeTab = 0;
-
-// ══════════════════════════════════════════════
-// UTILITIES
-// ══════════════════════════════════════════════
-const fmtGP = n => n >= 1e6 ? `$${(n/1e6).toFixed(1)}M` : n >= 1e3 ? `$${(n/1e3).toFixed(0)}K` : `$${n}`;
-const fmtFull = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
-const typeBadge = t => t==='Customer'?'b-accent':t==='Vendor'?'b-muted':'b-green';
-const statusBadge = s => s==='Active'?'b-green':s==='On Hold'?'b-amber':'b-muted';
-const crsColor = c => c>=70?'var(--green)':c>=40?'var(--amber)':'var(--red)';
-const tlColor = e => e.zed ? 'var(--zl)' : e.actor==='System' ? 'var(--green)' : 'var(--accent)';
-
-const svg = {
-  search: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
-  plus:   `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>`,
-  zap:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
-  file:   `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>`,
-  close:  `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>`,
-  send:   `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/></svg>`,
+const S={
+  search:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
+  plus:`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>`,
+  zap:`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+  close:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>`,
+  send:`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/></svg>`,
 };
 
-// ══════════════════════════════════════════════
-// RENDER ENGINE
-// ══════════════════════════════════════════════
-function render() {
-  // ZED panel
-  document.getElementById('zed-slot').innerHTML = zedOpen ? renderZed() : '';
-
-  // Nav active state
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  const navEl = document.getElementById(`nav-${page}`);
-  if (navEl) navEl.classList.add('active');
-
-  // Page titles
-  const titles = {
-    dashboard:'Command Dashboard', contacts:'Contact Manager',
-    requirements:'Requirements', quotes:'Quotes', orders:'Sales Orders',
-    purchasing:'Purchase Orders', inventory:'Inventory & STRUCZ Intel™',
-    invoices:'Invoicing', rma:'RMA & Credit Memos',
-    offers:'Offers & Broadcast™', settings:'Settings',
-  };
-  document.getElementById('hdr-title').textContent = titles[page] || page;
-
-  // Page body
-  const body = document.getElementById('page-body');
-  if (page === 'dashboard') body.innerHTML = renderDashboard();
-  else if (page === 'contacts') body.innerHTML = company ? renderRecord() : renderList();
-  else body.innerHTML = renderPlaceholder();
+function render(){
+  document.getElementById('zed-slot').innerHTML=zedOpen?renderZed():'';
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  const ne=document.getElementById('nav-'+page);if(ne)ne.classList.add('active');
+  const titles={dashboard:'Command Dashboard',contacts:'Contact Manager',requirements:'Requirements',quotes:'Quotes',orders:'Sales Orders',purchasing:'Purchase Orders',inventory:'Inventory & STRUCZ Intel\u2122',invoices:'Invoicing',rma:'RMA & Credit Memos',offers:'Offers & Broadcast\u2122',settings:'Settings'};
+  document.getElementById('hdr-title').textContent=titles[page]||page;
+  const pages={dashboard:renderDashboard,contacts:renderContacts,requirements:renderRequirements,quotes:renderQuotes,orders:renderOrders,purchasing:renderPurchasing,inventory:renderInventory,invoices:renderInvoices,rma:renderRMA,offers:renderOffers,settings:renderSettings};
+  document.getElementById('page-body').innerHTML=(pages[page]||renderSettings)();
 }
 
-// ══════════════════════════════════════════════
-// DASHBOARD
-// ══════════════════════════════════════════════
-function renderDashboard() {
-  const acts = [
-    ['Matched R-8841 (TMS320F28335) against 3 vendor offers from IC Source','3:42 AM'],
-    ['Sent 7 revival emails to dormant customers — 2 already opened','4:15 AM'],
-    ['Updated CRS scores for 24 companies — Meridian Systems ↑ to 95','5:01 AM'],
-    ['Pacific Rim Supply replied to broadcast — offer auto-created and matched','6:33 AM'],
-    ['Morning briefing generated for 4 active users','7:00 AM'],
-  ];
-  return `
-<div style="padding:22px 24px;">
-
-  <div class="intro-banner">
-    <div style="width:38px;height:38px;border-radius:9px;background:rgba(123,47,190,.3);border:1px solid rgba(123,47,190,.5);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-      ${svg.zap.replace('13','18').replace('13','18')}
-    </div>
-    <div style="flex:1;">
-      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px;">Good morning, Craig. ZED worked overnight.</div>
-      <div style="font-size:12px;color:var(--muted);">3 requirement matches · 7 revival emails sent · 2 vendor replies received · 4 past-due SOs need attention today.</div>
-    </div>
-    <span class="badge b-purple">Colleague Mode</span>
+function renderDashboard(){
+  const acts=[['Matched R-8841 (TMS320F28335) against 3 vendor offers from IC Source','3:42 AM'],['Sent 7 revival emails to dormant customers — 2 already opened','4:15 AM'],['Updated CRS scores for 24 companies — Meridian Systems up to 95','5:01 AM'],['Pacific Rim Supply replied to broadcast — offer auto-created','6:33 AM'],['Morning briefing generated for 4 active users','7:00 AM']];
+  return `<div style="padding:22px 24px">
+  <div class="intro"><div style="width:38px;height:38px;border-radius:9px;background:rgba(123,47,190,.3);border:1px solid rgba(123,47,190,.5);display:flex;align-items:center;justify-content:center;flex-shrink:0">${S.zap}</div><div style="flex:1"><div style="font-size:14px;font-weight:600;margin-bottom:3px">Good morning, Craig. ZED worked overnight.</div><div style="font-size:12px;color:var(--muted)">3 requirement matches · 7 revival emails sent · 2 vendor replies · 4 past-due SOs need attention today</div></div><span class="badge b-purple">Colleague Mode</span></div>
+  <div class="g4" style="margin-bottom:16px">
+    <div class="metric"><div class="m-lbl">Requisitions In</div><div class="m-val" style="color:var(--accent)">47</div><div class="m-d up">↑ 12 vs yesterday · Live</div></div>
+    <div class="metric"><div class="m-lbl">Open Quotes</div><div class="m-val" style="color:var(--amber)">23</div><div class="m-d dn">↓ 2 vs yesterday</div></div>
+    <div class="metric"><div class="m-lbl">Past Due SOs</div><div class="m-val" style="color:var(--red)">4</div><div class="m-d dn">↑ 1 — needs attention</div></div>
+    <div class="metric"><div class="m-lbl">GP Today</div><div class="m-val" style="color:var(--green)">$18.4K</div><div class="m-d up">↑ $2.1K vs avg</div></div>
   </div>
-
-  <div class="g4" style="margin-bottom:16px;">
-    <div class="metric"><div class="m-lbl">Requisitions In</div><div class="m-val" style="color:var(--accent);">47</div><div class="m-delta up">↑ 12 vs yesterday · <span style="opacity:.7;font-size:10px;">Live</span></div></div>
-    <div class="metric"><div class="m-lbl">Open Quotes</div><div class="m-val" style="color:var(--amber);">23</div><div class="m-delta dn">↓ 2 vs yesterday</div></div>
-    <div class="metric"><div class="m-lbl">Past Due SOs</div><div class="m-val" style="color:var(--red);">4</div><div class="m-delta dn">↑ 1 — needs attention</div></div>
-    <div class="metric"><div class="m-lbl">GP Today</div><div class="m-val" style="color:var(--green);">$18.4K</div><div class="m-delta up">↑ $2.1K vs avg</div></div>
-  </div>
-
-  <div class="card" style="margin-bottom:16px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <div style="font-size:13px;font-weight:600;color:var(--text);">Monthly GP Progress — May 2026</div>
-      <div style="font-size:12px;color:var(--muted);">$284,600 / $350,000 · ZED attributed $42,200</div>
-    </div>
-    <div class="prog-track"><div class="prog-fill" style="width:81%;"></div></div>
-    <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:var(--muted);">
-      <span>81% of target</span><span>$65,400 remaining</span><span style="color:var(--zl);">ZED: 15% of GP</span>
-    </div>
-  </div>
-
+  <div class="card" style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-size:13px;font-weight:600">Monthly GP Progress — May 2026</div><div style="font-size:12px;color:var(--muted)">$284,600 / $350,000 · ZED: $42,200 (15%)</div></div><div class="prog"><div class="prog-fill" style="width:81%"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:var(--muted)"><span>81% of target</span><span>$65,400 remaining</span><span style="color:var(--zl)">ZED attributed: 15%</span></div></div>
   <div class="g2">
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <div style="font-size:13px;font-weight:600;color:var(--text);">Recent Requirements</div>
-        <span class="badge b-green b-sm">Live · SignalR</span>
-      </div>
-      ${REQS.map(r=>`
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b1);">
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:12px;font-weight:600;color:var(--text);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${r.part}</div>
-          <div style="font-size:11px;color:var(--muted);">${r.mfr} · Qty: ${r.qty.toLocaleString()} · Rep: ${r.rep}</div>
-        </div>
-        <div style="display:flex;gap:5px;align-items:center;flex-shrink:0;">
-          ${r.hot?'<span class="badge b-red b-sm">HOT</span>':''}
-          <span style="font-size:10px;color:var(--dim);white-space:nowrap;">${r.date}</span>
-        </div>
-      </div>`).join('')}
-    </div>
-
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <div style="font-size:13px;font-weight:600;color:var(--text);">ZED Activity — Overnight</div>
-        <span class="badge b-purple b-sm">ZED</span>
-      </div>
-      ${acts.map(([t,time],i)=>`
-      <div style="display:flex;gap:9px;padding:7px 0;${i<acts.length-1?'border-bottom:1px solid var(--b1)':''}">
-        <div style="width:5px;height:5px;border-radius:50%;background:var(--zl);flex-shrink:0;margin-top:5px;"></div>
-        <div>
-          <div style="font-size:12px;color:var(--text);line-height:1.5;">${t}</div>
-          <div style="font-size:10px;color:var(--dim);">${time}</div>
-        </div>
-      </div>`).join('')}
-    </div>
+    <div class="card"><div class="sec-hdr"><div class="sec-title">Recent Requirements</div><span class="badge b-green b-sm">Live · SignalR</span></div>${C.reqs.slice(0,5).map(r=>`<div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--b1)"><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.part}</div><div style="font-size:11px;color:var(--muted)">${r.mfr} · Qty: ${r.qty.toLocaleString()} · ${r.rep}</div></div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0">${r.hot?'<span class="badge b-red b-sm">HOT</span>':''}<span style="font-size:10px;color:var(--dim)">${r.date.split(' ')[0]}</span></div></div>`).join('')}</div>
+    <div class="card"><div class="sec-hdr"><div class="sec-title">ZED Activity — Overnight</div><span class="badge b-purple b-sm">ZED</span></div>${acts.map(([t,time],i)=>`<div style="display:flex;gap:9px;padding:6px 0;${i<acts.length-1?'border-bottom:1px solid var(--b1)':''}"><div style="width:5px;height:5px;border-radius:50%;background:var(--zl);flex-shrink:0;margin-top:5px"></div><div><div style="font-size:12px;line-height:1.5">${t}</div><div style="font-size:10px;color:var(--dim)">${time}</div></div></div>`).join('')}</div>
   </div>
-
   <div class="powered">Powered by STRUCZ™ · ZD Integrated Circuits, Inc. · Colleague Mode</div>
 </div>`;
 }
 
-// ══════════════════════════════════════════════
-// CONTACT LIST
-// ══════════════════════════════════════════════
-function renderList() {
-  const filtered = COMPANIES.filter(c =>
-    c.name.toLowerCase().includes(search.toLowerCase()) &&
-    (filter==='All'||c.type===filter||(filter==='Hold'&&(c.creditHold||c.eraHold)))
-  );
-  const cols = '2.2fr 1fr 100px 64px 1fr 110px';
-  return `
-<div style="display:flex;flex-direction:column;height:100%;">
-  <div class="toolbar">
-    <div class="search-bar" style="flex:1;max-width:380px;">
-      ${svg.search}
-      <input placeholder="Search companies, contacts, phone… (Elasticsearch — sub-100ms)"
-             oninput="search=this.value;render()" value="${search}">
-    </div>
-    ${['All','Customer','Vendor','Both','Hold'].map(f=>
-      `<button class="pill${filter===f?' on':''}" onclick="filter='${f}';render()">${f}</button>`
-    ).join('')}
-    <button class="btn btn-primary" style="margin-left:auto;">${svg.plus} New Company</button>
-  </div>
-
-  <div class="tbl-hdr" style="grid-template-columns:${cols};">
-    <span>Company</span><span>City / State</span><span>Type</span>
-    <span>Rep</span><span>Last Order</span><span>Lifetime GP</span>
-  </div>
-
-  <div style="overflow-y:auto;flex:1;">
-    ${filtered.map(c=>`
-    <div class="tbl-row" style="grid-template-columns:${cols};" onclick="company=COMPANIES.find(x=>x.id==${c.id});render()">
-      <div style="display:flex;align-items:center;gap:7px;min-width:0;">
-        <span style="font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.name}</span>
-        ${c.creditHold?'<span class="badge b-red b-sm">CREDIT HOLD</span>':''}
-        ${c.eraHold   ?'<span class="badge b-amber b-sm">ERA HOLD</span>':''}
-      </div>
-      <div style="font-size:13px;color:var(--muted);">${c.city}, ${c.state}</div>
-      <div><span class="badge ${typeBadge(c.type)} b-sm">${c.type}</span></div>
-      <div>
-        <div class="av" style="width:26px;height:26px;font-size:10px;font-weight:700;
-          background:${c.rep==='CZ'?'rgba(46,134,171,.22)':'rgba(74,85,104,.25)'};
-          border:1px solid ${c.rep==='CZ'?'rgba(46,134,171,.4)':'rgba(74,85,104,.4)'};
-          color:${c.rep==='CZ'?'var(--accent)':'var(--muted)'};">${c.rep}</div>
-      </div>
-      <div style="font-size:13px;color:var(--muted);">${c.lastOrder}</div>
-      <div style="font-size:13px;font-weight:600;color:var(--green);">${fmtGP(c.gp)}</div>
-    </div>`).join('')}
-  </div>
-
-  <div style="padding:9px 20px;border-top:1px solid var(--b1);font-size:11px;color:var(--dim);display:flex;justify-content:space-between;">
-    <span>Showing ${filtered.length} of ${COMPANIES.length} companies</span>
-    <span>Elasticsearch powered · Sub-100ms · Click any row to open record</span>
-  </div>
+function renderContacts(){
+  if(company)return renderRecord();
+  const filtered=C.companies.filter(c=>c.name.toLowerCase().includes(search.toLowerCase())&&(filter==='All'||c.type===filter||(filter==='Hold'&&(c.creditHold||c.eraHold))));
+  const cols='2.2fr 1fr 100px 64px 1fr 110px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:380px">${S.search}<input placeholder="Search companies, contacts, phone… (Elasticsearch)" oninput="search=this.value;render()" value="${search}"></div>${['All','Customer','Vendor','Both','Hold'].map(f=>`<button class="pill${filter===f?' on':''}" onclick="filter='${f}';render()">${f}</button>`).join('')}<button class="btn btn-primary" style="margin-left:auto">${S.plus} New Company</button></div>
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>Company</span><span>City / State</span><span>Type</span><span>Rep</span><span>Last Order</span><span>Lifetime GP</span></div>
+  <div style="overflow-y:auto;flex:1">${filtered.map(c=>`<div class="tbl-row" style="grid-template-columns:${cols}" onclick="company=C.companies.find(x=>x.id==${c.id});render()"><div style="display:flex;align-items:center;gap:6px;min-width:0"><span style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</span>${c.creditHold?'<span class="badge b-red b-sm">CREDIT HOLD</span>':''}${c.eraHold?'<span class="badge b-amber b-sm">ERA HOLD</span>':''}</div><div style="font-size:13px;color:var(--muted)">${c.city}, ${c.state}</div><div><span class="badge ${typeBadge(c.type)} b-sm">${c.type}</span></div><div><div class="av" style="width:26px;height:26px;font-size:10px;background:${c.rep==='CZ'?'rgba(46,134,171,.22)':'rgba(74,85,104,.25)'};border:1px solid ${c.rep==='CZ'?'rgba(46,134,171,.4)':'rgba(74,85,104,.4)'};color:${c.rep==='CZ'?'var(--accent)':'var(--muted)'}">${c.rep}</div></div><div style="font-size:13px;color:var(--muted)">${c.lastOrder}</div><div style="font-size:13px;font-weight:600;color:var(--green)">${fmtGP(c.gp)}</div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>Showing ${filtered.length} of ${C.companies.length} companies</span><span>Elasticsearch · Sub-100ms · Click any row to open</span></div>
 </div>`;
 }
 
-// ══════════════════════════════════════════════
-// COMPANY RECORD
-// ══════════════════════════════════════════════
-function renderRecord() {
-  const c = company;
-  const contacts = CONTACTS[c.id] || [];
-  const timeline = TIMELINE[c.id] || [];
-  const tabs = ['Requirements','Quotes','Sales Orders','Invoices','Purchase Orders','Offers','Shipping','Documents'];
+function renderRecord(){
+  const c=company,contacts=C.contacts[c.id]||[],timeline=C.timeline[c.id]||[];
+  const tabs=['Requirements','Quotes','Sales Orders','Invoices','Purchase Orders','Offers','Shipping','Documents'];
+  return `<div class="co-wrap"><div class="co-main"><div style="padding:12px 20px;border-bottom:1px solid var(--b1);background:var(--surface);flex-shrink:0"><button class="btn btn-ghost btn-sm" onclick="company=null;render()" style="margin-bottom:8px;font-size:12px;padding:3px 0">← Back to Contacts</button><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:4px"><h2 style="font-size:19px;font-weight:700;letter-spacing:-.3px">${c.name}</h2><span class="badge ${typeBadge(c.type)}">${c.type}</span><span class="badge ${statusBadge(c.status)}">${c.status}</span>${c.creditHold?'<span class="badge b-red">CREDIT HOLD</span>':''}${c.eraHold?'<span class="badge b-amber">ERA HOLD</span>':''}</div><div style="font-size:12px;color:var(--muted)">${c.city}, ${c.state} · ${c.phone} · ${c.site}</div></div><div style="display:flex;gap:7px;flex-shrink:0"><button class="btn btn-sm">Edit</button><button class="btn btn-sm">New Quote</button><button class="btn btn-primary btn-sm">${S.plus} New Req</button></div></div></div>
+  <div class="g2" style="padding:14px 20px;flex-shrink:0"><div class="card"><div class="card-lbl">Company Info</div>${[['Sales Rep',`<div class="av" style="width:22px;height:22px;font-size:9px;background:rgba(46,134,171,.22);border:1px solid rgba(46,134,171,.4);color:var(--accent)">${c.rep}</div>`],['Customer Since','March 2015'],['Last Order',c.lastOrder],['Lifetime GP',`<span style="color:var(--green);font-weight:600">${fmtFull(c.gp)}</span>`],['CRS Score',`<span style="color:${crsColor(c.crs)};font-weight:700">${c.crs} / 100</span>`],['Class',c.cls]].map(([k,v])=>`<div class="ir"><span class="il">${k}</span><span class="iv">${v}</span></div>`).join('')}</div><div class="card"><div class="card-lbl">Financial</div>${[['Terms','NET 30'],['Credit Limit','$250,000'],['Available','$207,500'],['Credit Hold',`<span class="badge ${c.creditHold?'b-red':'b-green'} b-sm">${c.creditHold?'YES':'NO'}</span>`],['ERA Hold',`<span class="badge ${c.eraHold?'b-amber':'b-green'} b-sm">${c.eraHold?'YES':'NO'}</span>`],['Tax Exempt','Yes — RE-2024-8821']].map(([k,v])=>`<div class="ir"><span class="il">${k}</span><span class="iv">${v}</span></div>`).join('')}</div></div>
+  <div style="padding:0 20px 14px;flex-shrink:0"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div class="card-lbl" style="margin-bottom:0">Contacts</div><button class="btn btn-sm" style="color:var(--accent);border-color:rgba(46,134,171,.3);font-size:11px">${S.plus} Add</button></div>${contacts.length?contacts.map(ct=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b1)"><div class="av" style="width:34px;height:34px;font-size:12px;background:rgba(46,134,171,.15);border:1px solid rgba(46,134,171,.3);color:var(--accent)">${ct.fn[0]}${ct.ln[0]}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px">${ct.fn} ${ct.ln}${ct.primary?'<span class="badge b-accent b-sm">Primary</span>':''}</div><div style="font-size:11px;color:var(--muted)">${ct.title} · ${ct.email}</div></div><button class="btn btn-sm" style="font-size:11px;color:var(--accent);border-color:rgba(46,134,171,.3)">${S.send} Email</button></div>`).join(''):'<div style="font-size:12px;color:var(--dim);text-align:center;padding:12px 0">No contacts yet</div>'}</div></div>
+  <div style="flex-shrink:0"><div class="tab-bar">${tabs.map((t,i)=>`<button class="tab${activeTab===i?' on':''}" onclick="activeTab=${i};render()">${t}</button>`).join('')}</div><div style="padding:12px 20px;font-size:12px;color:var(--dim)">${tabs[activeTab]} for ${c.name} · Elasticsearch · Click any row to open</div></div>
+</div>
+<div class="co-tl"><div style="padding:11px 13px;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center;flex-shrink:0"><div style="font-size:12px;font-weight:600">Activity Timeline</div><button class="btn btn-sm" style="font-size:10px;color:var(--accent);border-color:rgba(46,134,171,.3)" onclick="document.getElementById('nf').classList.toggle('show')">+ Note</button></div>
+<div class="note-form" id="nf"><textarea class="inp" rows="3" placeholder="Add a note…"></textarea><div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" style="accent-color:var(--accent)"> Set follow-up</label><div style="display:flex;gap:5px"><button class="btn btn-sm" onclick="document.getElementById('nf').classList.remove('show')">Cancel</button><button class="btn btn-primary btn-sm">Save</button></div></div></div>
+<div class="tl-wrap">${timeline.map(e=>`<div class="tl-entry" style="color:${tlColor(e)}"><div class="tl-dot"><div class="tl-pip"></div></div><div style="flex:1;min-width:0"><div style="display:flex;gap:5px;align-items:center;margin-bottom:3px;flex-wrap:wrap">${e.zed?'<span class="badge b-purple b-sm">ZED</span>':''}<span style="font-size:10px;color:var(--dim)">${e.actor} · ${e.time}</span></div><div style="font-size:12px;color:var(--text);line-height:1.55">${e.text}</div></div></div>`).join('')}</div>
+<div class="zed-disc">ZED is AI and can make mistakes. Please double-check responses.</div></div></div>`;
+}
 
-  return `
-<div class="co-wrap">
-
-  <!-- Main column -->
-  <div class="co-main">
-
-    <!-- Back + Title bar -->
-    <div style="padding:12px 20px;border-bottom:1px solid var(--b1);background:var(--surface);flex-shrink:0;">
-      <button class="btn btn-ghost btn-sm" onclick="company=null;render()" style="margin-bottom:9px;font-size:12px;padding:3px 0;">
-        ← Back to Contacts
-      </button>
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
-        <div>
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
-            <h2 style="font-size:20px;font-weight:700;color:var(--text);letter-spacing:-.3px;">${c.name}</h2>
-            <span class="badge ${typeBadge(c.type)}">${c.type}</span>
-            <span class="badge ${statusBadge(c.status)}">${c.status}</span>
-            ${c.creditHold?'<span class="badge b-red">CREDIT HOLD</span>':''}
-            ${c.eraHold   ?'<span class="badge b-amber">ERA HOLD</span>':''}
-          </div>
-          <div style="font-size:12px;color:var(--muted);">${c.city}, ${c.state} · ${c.phone} · ${c.site}</div>
-        </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;">
-          <button class="btn btn-sm">Edit</button>
-          <button class="btn btn-sm">New Quote</button>
-          <button class="btn btn-primary btn-sm">${svg.plus} New Req</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Info cards -->
-    <div class="g2" style="padding:15px 20px;flex-shrink:0;">
-      <div class="card">
-        <div class="card-lbl">Company Info</div>
-        ${[
-          ['Sales Rep',`<div class="av" style="width:24px;height:24px;font-size:10px;font-weight:700;display:inline-flex;background:rgba(46,134,171,.22);border:1px solid rgba(46,134,171,.4);color:var(--accent);">${c.rep}</div>`],
-          ['Customer Since','March 2015'],
-          ['Last Order',c.lastOrder],
-          ['Lifetime GP',`<span style="color:var(--green);font-weight:600;">${fmtFull(c.gp)}</span>`],
-          ['CRS Score',`<span style="color:${crsColor(c.crs)};font-weight:700;">${c.crs} / 100</span>`],
-          ['Primary Class',c.cls],
-        ].map(([k,v])=>`<div class="info-r"><span class="il">${k}</span><span class="iv">${v}</span></div>`).join('')}
-      </div>
-      <div class="card">
-        <div class="card-lbl">Financial</div>
-        ${[
-          ['Payment Terms','NET 30'],
-          ['Credit Limit','$250,000'],
-          ['Credit Available','$207,500'],
-          ['Credit Hold',`<span class="badge ${c.creditHold?'b-red':'b-green'} b-sm">${c.creditHold?'YES':'NO'}</span>`],
-          ['ERA Hold',`<span class="badge ${c.eraHold?'b-amber':'b-green'} b-sm">${c.eraHold?'YES':'NO'}</span>`],
-          ['Tax Exempt','Yes — RE-2024-8821'],
-        ].map(([k,v])=>`<div class="info-r"><span class="il">${k}</span><span class="iv">${v}</span></div>`).join('')}
-      </div>
-    </div>
-
-    <!-- Contacts -->
-    <div style="padding:0 20px 15px;flex-shrink:0;">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;">
-          <div class="card-lbl" style="margin-bottom:0;">Contacts</div>
-          <button class="btn btn-sm" style="color:var(--accent);border-color:rgba(46,134,171,.3);font-size:11px;">${svg.plus} Add Contact</button>
-        </div>
-        ${contacts.length === 0
-          ? `<div style="font-size:12px;color:var(--dim);text-align:center;padding:14px 0;">No contacts yet — add the first one</div>`
-          : contacts.map(ct=>`
-        <div style="display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--b1);">
-          <div class="av" style="width:36px;height:36px;font-size:13px;font-weight:600;background:rgba(46,134,171,.15);border:1px solid rgba(46,134,171,.3);color:var(--accent);">${ct.fn[0]}${ct.ln[0]}</div>
-          <div style="flex:1;min-width:0;">
-            <div style="font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:7px;">
-              ${ct.fn} ${ct.ln}
-              ${ct.primary?'<span class="badge b-accent b-sm">Primary</span>':''}
-            </div>
-            <div style="font-size:11px;color:var(--muted);">${ct.title} · ${ct.email}</div>
-          </div>
-          <button class="btn btn-sm" style="font-size:11px;color:var(--accent);border-color:rgba(46,134,171,.3);">${svg.send} Email</button>
-        </div>`).join('')}
-      </div>
-    </div>
-
-    <!-- Section tabs -->
-    <div style="flex-shrink:0;">
-      <div class="tab-bar">
-        ${tabs.map((t,i)=>`<button class="tab${activeTab===i?' on':''}" onclick="activeTab=${i};render()">${t}</button>`).join('')}
-      </div>
-      <div style="padding:13px 20px;font-size:12px;color:var(--dim);">
-        ${tabs[activeTab]} data for ${c.name} · Elasticsearch powered · Click any row to open the record
-      </div>
-    </div>
-
-  </div><!-- /co-main -->
-
-  <!-- Activity Timeline -->
-  <div class="co-tl">
-    <div style="padding:12px 14px;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
-      <div style="font-size:13px;font-weight:600;color:var(--text);">Activity Timeline</div>
-      <button class="btn btn-sm" style="font-size:11px;color:var(--accent);border-color:rgba(46,134,171,.3);" onclick="document.getElementById('nf').classList.toggle('show')">+ Note</button>
-    </div>
-
-    <div class="note-form" id="nf">
-      <textarea class="inp" rows="3" placeholder="Add a note… e.g. 'Spoke to Jane — call back next week re Q4 budget'"></textarea>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
-        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;cursor:pointer;">
-          <input type="checkbox" style="accent-color:var(--accent);"> Set follow-up task
-        </label>
-        <div style="display:flex;gap:6px;">
-          <button class="btn btn-sm" onclick="document.getElementById('nf').classList.remove('show')">Cancel</button>
-          <button class="btn btn-primary btn-sm">Save Note</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-wrap">
-      ${timeline.length === 0
-        ? `<div style="font-size:12px;color:var(--dim);text-align:center;padding:20px 0;">No activity yet</div>`
-        : timeline.map(e=>`
-      <div class="tl-entry" style="color:${tlColor(e)};">
-        <div class="tl-dot"><div class="tl-pip"></div></div>
-        <div style="flex:1;min-width:0;">
-          <div style="display:flex;gap:6px;align-items:center;margin-bottom:4px;flex-wrap:wrap;">
-            ${e.zed?'<span class="badge b-purple b-sm">ZED</span>':''}
-            <span style="font-size:10px;color:var(--dim);">${e.actor} · ${e.time}</span>
-          </div>
-          <div style="font-size:12px;color:var(--text);line-height:1.55;">${e.text}</div>
-        </div>
-      </div>`).join('')}
-    </div>
-
-    <div class="zed-disc">
-      ZED is AI and can make mistakes. Please double-check responses. · Powered by STRUCZ™
-    </div>
+function renderRequirements(){
+  const cols='1.2fr 1.8fr 1.2fr 80px 90px 80px 70px 80px 90px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:360px">${S.search}<input placeholder="Search part number, manufacturer…"></div><button class="pill on">All</button><button class="pill">Unworked</button><button class="pill">Hot</button><button class="pill">My Reqs</button><select class="inp" style="width:110px;padding:5px 8px"><option>All Reps</option><option>CZ</option><option>LP</option><option>MR</option></select><button class="btn btn-primary" style="margin-left:auto">${S.plus} New Req</button><button class="btn">📡 Post Hot Wanted</button></div>
+  <div style="display:flex;gap:12px;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--b1);flex-shrink:0">
+    <div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">Open Reqs</div><div style="font-size:22px;font-weight:700;color:var(--accent)">47</div></div>
+    <div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">Hot / Urgent</div><div style="font-size:22px;font-weight:700;color:var(--red)">8</div></div>
+    <div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">Quoted Today</div><div style="font-size:22px;font-weight:700;color:var(--green)">3</div></div>
+    <div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">ZED Matches</div><div style="font-size:22px;font-weight:700;color:var(--zl)">5</div></div>
   </div>
-
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>Req #</span><span>Part Number</span><span>Manufacturer</span><span>Qty</span><span>Target</span><span>Cond</span><span>Rep</span><span>Worked</span><span>Date</span></div>
+  <div style="overflow-y:auto;flex:1">${C.reqs.map(r=>`<div class="tbl-row" style="grid-template-columns:${cols}"><div style="font-size:12px;font-weight:600;color:var(--accent);font-family:var(--mono)">${r.id}</div><div style="font-size:12px;font-weight:600;font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.part}${r.hot?' <span class="badge b-red b-sm">HOT</span>':''}</div><div style="font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.mfr}</div><div style="font-size:12px">${r.qty.toLocaleString()}</div><div style="font-size:12px;color:var(--green)">${r.target}</div><div><span class="badge b-accent b-sm">${r.cond}</span></div><div><div class="av" style="width:22px;height:22px;font-size:9px;background:${r.rep==='CZ'?'rgba(46,134,171,.22)':'rgba(74,85,104,.25)'};border:1px solid ${r.rep==='CZ'?'rgba(46,134,171,.4)':'rgba(74,85,104,.4)'};color:${r.rep==='CZ'?'var(--accent)':'var(--muted)'}">${r.rep}</div></div><div>${r.worked==='Q'?'<span class="badge b-green b-sm">Quoted</span>':r.worked==='N'?'<span class="badge b-muted b-sm">Negative</span>':'<span class="badge b-accent b-sm">Open</span>'}</div><div style="font-size:11px;color:var(--dim);white-space:nowrap">${r.date.split(' ')[0]}</div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>47 open requirements — ZED monitors continuously · North star metric</span><span>Powered by STRUCZ™</span></div>
 </div>`;
 }
 
-// ══════════════════════════════════════════════
-// ZED PANEL
-// ══════════════════════════════════════════════
-function renderZed() {
-  const acts = [
-    ['Matched R-8841 against 3 IC Source offers','3:42 AM'],
-    ['7 revival emails sent — 2 opened','4:15 AM'],
-    ['CRS updated — Meridian Systems ↑ to 95','5:01 AM'],
-    ['Pacific Rim replied — offer auto-created','6:33 AM'],
-    ['Morning briefing generated for 4 users','7:00 AM'],
-  ];
-  return `
-<div class="zed-panel">
-  <div class="zed-hdr">
-    <div class="zed-mark">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--zl)" stroke-width="2.2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-    </div>
-    <div style="flex:1;">
-      <div style="font-weight:700;font-size:14px;color:var(--zl);">ZED™</div>
-      <div style="font-size:10px;color:rgba(168,85,247,.65);">AI Operator · Colleague Mode</div>
-    </div>
-    <button onclick="toggleZed()" style="background:transparent;border:none;padding:5px;border-radius:5px;color:var(--muted);transition:color .12s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">${svg.close}</button>
-  </div>
-
-  <div class="zed-sec">
-    <div class="zed-lbl">ZED Needs You — ${ZED_NEEDS.length} items</div>
-    ${ZED_NEEDS.map(n=>`
-    <div class="zed-need ${n.p}">
-      <div style="font-size:12px;color:var(--text);line-height:1.55;margin-bottom:7px;">${n.text}</div>
-      <div style="display:flex;align-items:center;justify-content:space-between;">
-        <span style="font-size:10px;color:var(--dim);">${n.time}</span>
-        <div style="display:flex;gap:5px;">
-          <button class="btn btn-sm" style="font-size:11px;color:var(--zl);border-color:rgba(123,47,190,.35);padding:3px 10px;">Yes →</button>
-          <button class="btn btn-sm" style="font-size:11px;padding:3px 8px;">Review</button>
-        </div>
-      </div>
-    </div>`).join('')}
-  </div>
-
-  <div class="zed-sec scroll">
-    <div class="zed-lbl">Morning Briefing</div>
-    <div style="background:rgba(123,47,190,.1);border:1px solid rgba(123,47,190,.18);border-radius:8px;padding:13px;margin-bottom:14px;">
-      <p style="font-size:12px;color:var(--text);line-height:1.65;margin-bottom:9px;">
-        Good morning, Craig. Overnight I matched <strong style="color:var(--zl);">3 requirements</strong> against new offers and sent <strong style="color:var(--zl);">7 revival emails</strong> — two vendors have already replied.
-      </p>
-      <p style="font-size:12px;color:var(--text);line-height:1.65;">
-        You have <strong style="color:var(--red);">4 past-due sales orders</strong> that need attention today. Acme Electronics is your highest-priority revival target — CRS 82, 90 days dormant, $142K lifetime GP.
-      </p>
-    </div>
-
-    <div class="zed-lbl">Ask ZED</div>
-    <div style="display:flex;gap:8px;background:rgba(123,47,190,.1);border:1px solid rgba(123,47,190,.22);border-radius:8px;padding:8px 11px;margin-bottom:14px;">
-      <input class="inp" placeholder="Ask ZED anything about your business…" style="background:transparent;border:none;padding:0;font-size:12px;height:auto;">
-      <button class="btn btn-primary btn-sm" style="flex-shrink:0;font-size:12px;">${svg.send}</button>
-    </div>
-
-    <div class="zed-lbl">ZED Overnight</div>
-    ${acts.map(([t,time],i)=>`
-    <div style="display:flex;gap:9px;padding:7px 0;${i<acts.length-1?'border-bottom:1px solid var(--b1)':''}">
-      <div style="width:5px;height:5px;border-radius:50%;background:var(--zl);flex-shrink:0;margin-top:5px;"></div>
-      <div>
-        <div style="font-size:11px;color:var(--text);line-height:1.55;">${t}</div>
-        <div style="font-size:10px;color:var(--dim);">${time}</div>
-      </div>
-    </div>`).join('')}
-  </div>
-
-  <div class="zed-disc">
-    ZED is AI and can make mistakes. Please double-check responses. · Powered by STRUCZ™
-  </div>
+function renderQuotes(){
+  const cols='1fr 1.8fr 2fr 110px 80px 80px 100px 100px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:340px">${S.search}<input placeholder="Search quotes…"></div><button class="pill on">All</button><button class="pill">Draft</button><button class="pill">Sent</button><button class="pill">Won</button><button class="pill">Lost</button><button class="btn btn-primary" style="margin-left:auto">${S.plus} New Quote</button></div>
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>Quote #</span><span>Company</span><span>Parts</span><span>Total</span><span>GP %</span><span>Rep</span><span>Auth</span><span>Status</span></div>
+  <div style="overflow-y:auto;flex:1">${C.quotes.map(q=>`<div class="tbl-row" style="grid-template-columns:${cols}"><div style="font-size:12px;font-weight:600;color:var(--accent);font-family:var(--mono)">${q.id}</div><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${q.co}</div><div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${q.parts}</div><div style="font-size:12px;font-weight:600">${fmtFull(q.total)}</div><div style="font-size:12px;color:${q.gp>20?'var(--green)':q.gp>15?'var(--accent)':'var(--amber)'};font-weight:600">${fmtPct(q.gp)}</div><div><div class="av" style="width:22px;height:22px;font-size:9px;background:rgba(46,134,171,.22);border:1px solid rgba(46,134,171,.4);color:var(--accent)">${q.rep}</div></div><div style="display:flex;gap:3px"><span style="font-size:10px;background:${q.auth1?'rgba(16,185,129,.12)':'var(--b1)'};color:${q.auth1?'var(--green)':'var(--dim)'};padding:2px 5px;border-radius:3px">${q.auth1||'Auth 1'}</span><span style="font-size:10px;background:${q.auth2?'rgba(16,185,129,.12)':'var(--b1)'};color:${q.auth2?'var(--green)':'var(--dim)'};padding:2px 5px;border-radius:3px">${q.auth2||'Auth 2'}</span></div><div><span class="badge ${q.status==='Won'?'b-green':q.status==='Lost'?'b-red':q.status==='Sent'?'b-accent':'b-muted'} b-sm">${q.status}</span></div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>5 quotes · Total: $171,875 · Avg GP: 18.2% · Two-level authorization required before printing</span><span>Powered by STRUCZ™</span></div>
 </div>`;
 }
 
-// ══════════════════════════════════════════════
-// PLACEHOLDER
-// ══════════════════════════════════════════════
-const sprints = {requirements:3,quotes:4,orders:5,purchasing:6,inventory:7,invoices:9,rma:10,offers:11,settings:15};
-const labels = {requirements:'Requirements',quotes:'Quotes',orders:'Sales Orders',purchasing:'Purchase Orders',inventory:'Inventory & STRUCZ Intel™',invoices:'Invoicing',rma:'RMA & Credit Memos',offers:'Offers & Broadcast™',settings:'Settings'};
-function renderPlaceholder() {
-  const label = labels[page] || page;
-  const sprint = sprints[page] || '—';
-  return `
-<div class="ph">
-  <div class="ph-icon">${svg.file}</div>
-  <div style="font-size:20px;font-weight:700;color:var(--text);">${label}</div>
-  <div style="font-size:13px;color:var(--muted);text-align:center;max-width:360px;line-height:1.6;">
-    Module spec in progress. Full screen specification and Blazor component build coming in Sprint ${sprint}.
-  </div>
-  <div style="display:flex;gap:10px;margin-top:4px;">
-    <span class="badge b-muted">Sprint ${sprint}</span>
-    <span class="badge b-purple">ZED integrated</span>
-  </div>
-  <div class="powered">Powered by STRUCZ™ · ZD Integrated Circuits, Inc.</div>
+function renderOrders(){
+  const cols='1fr 2fr 2fr 110px 100px 90px 80px 60px 60px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:340px">${S.search}<input placeholder="Search sales orders…"></div><button class="pill on">All</button><button class="pill">Open</button><button class="pill">Backordered</button><button class="pill">Past Due</button><button class="btn btn-primary" style="margin-left:auto">${S.plus} New SO</button><button class="btn">📋 Past Due Alert</button></div>
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>SO #</span><span>Company</span><span>Part</span><span>Total</span><span>Ship Date</span><span>Status</span><span>Rep</span><span>Insp</span><span>Funds</span></div>
+  <div style="overflow-y:auto;flex:1">${C.sos.map(s=>`<div class="tbl-row" style="grid-template-columns:${cols}"><div style="font-size:12px;font-weight:600;color:var(--accent);font-family:var(--mono)">${s.id}</div><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.co}</div><div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.part}</div><div style="font-size:12px;font-weight:600">${fmtFull(s.total)}</div><div style="font-size:12px;color:var(--muted)">${s.ship}</div><div><span class="badge b-sm" style="background:${soColor(s.status)}22;color:${soColor(s.status)}">${s.status}</span></div><div><div class="av" style="width:22px;height:22px;font-size:9px;background:rgba(46,134,171,.22);border:1px solid rgba(46,134,171,.4);color:var(--accent)">${s.rep}</div></div><div>${s.inspect?'<span class="badge b-amber b-sm">REQ</span>':'<span style="color:var(--dim);font-size:11px">—</span>'}</div><div>${s.funds?'<span style="color:var(--green);font-size:14px">✓</span>':'<span style="color:var(--dim);font-size:11px">—</span>'}</div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>5 sales orders · ZED monitors ship dates continuously · JLC split logic preserved</span><span>Powered by STRUCZ™</span></div>
 </div>`;
 }
 
-// ══════════════════════════════════════════════
-// ACTIONS
-// ══════════════════════════════════════════════
-function goPage(p) {
-  page = p;
-  company = null;
-  activeTab = 0;
-  render();
-}
-function toggleZed() {
-  zedOpen = !zedOpen;
-  render();
+function renderPurchasing(){
+  const cols='1fr 2fr 2fr 100px 110px 110px 90px 80px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:340px">${S.search}<input placeholder="Search purchase orders…"></div><button class="pill on">All</button><button class="pill">Unconfirmed</button><button class="pill">In Transit</button><button class="pill">Stock Buys</button><button class="btn btn-primary" style="margin-left:auto">${S.plus} New PO</button><button class="btn">💰 RSF Fund</button></div>
+  <div style="display:flex;gap:12px;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--b1);flex-shrink:0"><div class="card" style="flex:1;padding:10px 14px"><div class="card-lbl" style="margin-bottom:4px">RSF Fund Balance</div><div style="font-size:20px;font-weight:700;color:var(--accent)">$142,500</div><div style="font-size:10px;color:var(--muted)">$38,200 on order · $26,800 in inventory</div></div><div class="card" style="flex:1;padding:10px 14px"><div class="card-lbl" style="margin-bottom:4px">Open POs</div><div style="font-size:20px;font-weight:700">5</div><div style="font-size:10px;color:var(--muted)">2 unconfirmed · $77,700 total</div></div><div class="card" style="flex:1;padding:10px 14px"><div class="card-lbl" style="margin-bottom:4px">Pending SOs</div><div style="font-size:20px;font-weight:700;color:var(--amber)">3</div><div style="font-size:10px;color:var(--muted)">Awaiting product from vendors</div></div></div>
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>PO #</span><span>Vendor</span><span>Part</span><span>Cost</span><span>Deal Type</span><span>Status</span><span>Linked SO</span><span>Rep</span></div>
+  <div style="overflow-y:auto;flex:1">${C.pos.map(p=>`<div class="tbl-row" style="grid-template-columns:${cols}"><div style="font-size:12px;font-weight:600;color:var(--accent);font-family:var(--mono)">${p.id}</div><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.vendor}</div><div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.part}</div><div style="font-size:12px;font-weight:600">${fmtFull(p.cost)}</div><div><span class="badge ${p.deal==='Stock Buy'?'b-purple':p.deal==='Excess Bid'?'b-amber':p.deal==='Lot Buy'?'b-green':'b-accent'} b-sm">${p.deal}</span></div><div><span class="badge b-sm" style="background:${poColor(p.status)}22;color:${poColor(p.status)}">${p.status}</span></div><div style="font-size:11px;color:var(--muted);font-family:var(--mono)">${p.so||'—'}</div><div><div class="av" style="width:22px;height:22px;font-size:9px;background:rgba(74,85,104,.25);border:1px solid rgba(74,85,104,.4);color:var(--muted)">${p.rep}</div></div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>5 purchase orders · Deal types: Brokered Deal, Stock Buy, Excess Bid, Lot Buy</span><span>Powered by STRUCZ™</span></div>
+</div>`;
 }
 
-// ══════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════
+function renderInventory(){
+  const cols='1fr 2fr 1.5fr 60px 70px 80px 80px 90px 80px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:340px">${S.search}<input placeholder="Search part number, manufacturer…"></div><button class="pill on">All</button><button class="pill">New</button><button class="pill">Excess</button><button class="pill">Available</button><button class="btn btn-primary" style="margin-left:auto">${S.plus} Add Item</button><button class="btn" style="color:var(--zl);border-color:rgba(123,47,190,.4)">⚡ STRUCZ Intel™</button></div>
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>ID</span><span>Part Number</span><span>Manufacturer</span><span>Qty</span><span>Avail</span><span>Condition</span><span>Cost</span><span>Date Code</span><span>Location</span></div>
+  <div style="overflow-y:auto;flex:1">${C.inv.map(i=>`<div class="tbl-row" style="grid-template-columns:${cols}"><div style="font-size:11px;color:var(--dim);font-family:var(--mono)">${i.id}</div><div style="font-size:12px;font-weight:600;font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${i.part}</div><div style="font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${i.mfr}</div><div style="font-size:12px">${i.qty.toLocaleString()}</div><div style="font-size:12px;font-weight:600;color:${i.avail>0?'var(--green)':'var(--red)'}">${i.avail.toLocaleString()}</div><div><span class="badge ${i.cond==='New'?'b-green':'b-amber'} b-sm">${i.cond}</span></div><div style="font-size:12px;font-weight:600;color:var(--accent)">$${i.cost.toFixed(2)}</div><div style="font-size:12px;color:var(--muted)">${i.dc}</div><div style="font-size:12px;font-family:var(--mono);color:var(--muted)">${i.loc}</div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>5 items · STRUCZ Intel™ — search market pricing via Octopart/DigiKey/Mouser + ZED web intelligence</span><span>Powered by STRUCZ™</span></div>
+</div>`;
+}
+
+function renderInvoices(){
+  const cols='1fr 2fr 1fr 110px 80px 100px 80px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:340px">${S.search}<input placeholder="Search invoices…"></div><button class="pill on">All</button><button class="pill">Open</button><button class="pill">Overdue</button><button class="pill">Paid</button><button class="btn btn-primary" style="margin-left:auto">${S.plus} New Invoice</button><button class="btn">📊 QB Sync</button></div>
+  <div style="display:flex;gap:12px;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--b1);flex-shrink:0"><div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">Open AR</div><div style="font-size:20px;font-weight:700;color:var(--amber)">$13,200</div></div><div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">Overdue</div><div style="font-size:20px;font-weight:700;color:var(--red)">$8,900</div></div><div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">Paid MTD</div><div style="font-size:20px;font-weight:700;color:var(--green)">$60,800</div></div><div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">QB Sync</div><div style="font-size:20px;font-weight:700;color:var(--green)">✓ Live</div></div></div>
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>Invoice #</span><span>Company</span><span>SO #</span><span>Amount</span><span>GP %</span><span>Due Date</span><span>Status</span></div>
+  <div style="overflow-y:auto;flex:1">${C.invs.map(i=>`<div class="tbl-row" style="grid-template-columns:${cols}"><div style="font-size:12px;font-weight:600;color:var(--accent);font-family:var(--mono)">${i.id}</div><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${i.co}</div><div style="font-size:11px;color:var(--muted);font-family:var(--mono)">${i.so}</div><div style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px">${fmtFull(i.amount)}${i.status==='Paid'?'<span style="background:rgba(16,185,129,.15);color:var(--green);font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;border:1px solid var(--green)">PAID</span>':''}</div><div style="font-size:12px;color:${i.gp>20?'var(--green)':'var(--accent)'};font-weight:600">${fmtPct(i.gp)}</div><div style="font-size:12px;color:${i.status==='Overdue'?'var(--red)':'var(--muted)'};font-weight:${i.status==='Overdue'?600:400}">${i.due}</div><div><span class="badge b-sm" style="background:${invColor(i.status)}22;color:${invColor(i.status)}">${i.status}</span></div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>5 invoices · PAID stamp auto-applied on QuickBooks sync · Partial invoicing supported</span><span>Powered by STRUCZ™</span></div>
+</div>`;
+}
+
+function renderRMA(){
+  const cols='1fr 2fr 2fr 1.5fr 100px 80px 100px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:340px">${S.search}<input placeholder="Search RMAs…"></div><button class="pill on">All</button><button class="pill">Pending Auth</button><button class="pill">Authorized</button><button class="pill">Received</button><button class="btn btn-primary" style="margin-left:auto">${S.plus} New RMA</button></div>
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>RMA #</span><span>Company</span><span>Part / Qty</span><span>Reason</span><span>Vendor RMA</span><span>Auth</span><span>Status</span></div>
+  <div style="overflow-y:auto;flex:1">${C.rmas.map(r=>`<div class="tbl-row" style="grid-template-columns:${cols}"><div style="font-size:12px;font-weight:600;color:var(--accent);font-family:var(--mono)">${r.id}</div><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.co}</div><div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.part}</div><div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.reason}</div><div>${r.vendorRMA?`<span style="font-size:11px;font-family:var(--mono);color:var(--green)">${r.vendorRMA}</span>`:'<span class="badge b-red b-sm">Required</span>'}</div><div style="display:flex;gap:3px"><span style="font-size:10px;background:${r.auth1?'rgba(16,185,129,.12)':'var(--b1)'};color:${r.auth1?'var(--green)':'var(--dim)'};padding:2px 5px;border-radius:3px">${r.auth1||'—'}</span><span style="font-size:10px;background:${r.auth2?'rgba(16,185,129,.12)':'var(--b1)'};color:${r.auth2?'var(--green)':'var(--dim)'};padding:2px 5px;border-radius:3px">${r.auth2||'—'}</span></div><div><span class="badge ${r.status==='Authorized'?'b-green':r.status==='Received'?'b-accent':'b-amber'} b-sm">${r.status}</span></div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>3 RMAs · Vendor RMA required before customer RMA prints · Credit memos auto-generated · No negative invoice lines</span><span>Powered by STRUCZ™</span></div>
+</div>`;
+}
+
+function renderOffers(){
+  const cols='1fr 2fr 2fr 70px 80px 80px 100px 100px 80px 80px';
+  return `<div style="display:flex;flex-direction:column;height:100%">
+  <div class="toolbar"><div class="searchbar" style="flex:1;max-width:340px">${S.search}<input placeholder="Search offers…"></div><button class="pill on">All</button><button class="pill">IC Source</button><button class="pill">Broker Forum</button><button class="pill">Unconfirmed</button><button class="btn btn-primary" style="margin-left:auto">${S.plus} Add Offer</button><button class="btn" style="color:var(--zl);border-color:rgba(123,47,190,.35)">📡 Broadcast™</button></div>
+  <div style="display:flex;gap:12px;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--b1);flex-shrink:0"><div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">New Offers Today</div><div style="font-size:20px;font-weight:700;color:var(--accent)">4</div><div style="font-size:10px;color:var(--muted)">Via IC Source + Broker Forum</div></div><div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">ZED Matched</div><div style="font-size:20px;font-weight:700;color:var(--zl)">3</div><div style="font-size:10px;color:var(--muted)">Auto-matched to open reqs</div></div><div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">Broadcast Sent</div><div style="font-size:20px;font-weight:700;color:var(--green)">847</div><div style="font-size:10px;color:var(--muted)">Hot Wanted · This week</div></div><div class="metric" style="flex:1;padding:10px 14px"><div class="m-lbl">Replies Received</div><div style="font-size:20px;font-weight:700;color:var(--amber)">12</div><div style="font-size:10px;color:var(--muted)">ZED processed 9 of 12</div></div></div>
+  <div class="tbl-hdr" style="grid-template-columns:${cols}"><span>Offer #</span><span>Vendor</span><span>Part Number</span><span>Qty</span><span>Price</span><span>Cond</span><span>Source</span><span>Matches Req</span><span>Received</span><span>Status</span></div>
+  <div style="overflow-y:auto;flex:1">${C.offers.map(o=>`<div class="tbl-row" style="grid-template-columns:${cols}"><div style="font-size:12px;font-weight:600;color:var(--accent);font-family:var(--mono)">${o.id}</div><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${o.vendor}</div><div style="font-size:12px;font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${o.part}</div><div style="font-size:12px">${o.qty.toLocaleString()}</div><div style="font-size:12px;font-weight:600;color:var(--green)">$${o.price.toFixed(2)}</div><div><span class="badge b-green b-sm">${o.cond}</span></div><div><span class="badge ${o.source==='IC Source'?'b-purple':o.source==='Broker Forum'?'b-accent':'b-muted'} b-sm">${o.source}</span></div><div><span style="font-size:11px;color:var(--zl);font-family:var(--mono)">${o.match}</span></div><div style="font-size:11px;color:var(--dim)">${o.date}</div><div><span class="badge ${o.confirmed?'b-green':'b-amber'} b-sm">${o.confirmed?'Confirmed':'Unconfirmed'}</span></div></div>`).join('')}</div>
+  <div class="tbl-foot"><span>4 offers · Inbound vendor material · ZED auto-matches against open requirements</span><span>Powered by STRUCZ™</span></div>
+</div>`;
+}
+
+function renderSettings(){
+  const sections=[['Company Setup','Logo, colors, document templates, time zone, currency, business description'],['Users & Permissions','Add users, assign roles, set permissions, manage departments, regions, sites'],['Authorization Rules','Configure quote, SO, PO, invoice authorization thresholds by dollar amount'],['Compensation Plans','Commission rates, tiers, quotas, bogey amounts per employee'],['ZED Configuration','Temperature sliders, persona, revival settings, outreach preferences'],['Lookup Lists','Edit all dropdowns — conditions, deal types, ship via, terms, RMA reasons, and more'],['Document Templates','Quote, invoice, SO confirmation, CofC, pick ticket — logo and branding per template'],['Accounting Integration','QuickBooks / Xero — Push Only, Bidirectional, or STRUCZ Primary mode'],['STRUCZ Connect™','400+ integrations — Slack, Salesforce, HubSpot, FedEx, Google Drive, and more'],['Label Printing','Zebra, Dymo label printer setup — item labels, receiving labels, pick tickets'],['Data Migration','CSV import, QuickBooks import, full database migration — self-service'],['AI Token Usage','Current period consumption, top-up packs, team usage breakdown']];
+  return `<div style="padding:22px 24px"><h2 style="font-size:18px;font-weight:700;margin-bottom:6px">Settings</h2><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Configure your STRUCZ workspace · ZD Integrated Circuits, Inc.</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">${sections.map(([t,d])=>`<div class="card" style="cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--b1)'"><div style="font-size:13px;font-weight:600;margin-bottom:5px">${t}</div><div style="font-size:12px;color:var(--muted);line-height:1.5">${d}</div></div>`).join('')}</div><div class="powered" style="margin-top:24px">STRUCZ™ v1.0 · ZD Integrated Circuits, Inc. · admin.strucz.io for platform administration</div></div>`;
+}
+
+function renderZed(){
+  const acts=[['Matched R-8841 against 3 IC Source offers','3:42 AM'],['7 revival emails sent — 2 opened','4:15 AM'],['CRS updated — Meridian Systems up to 95','5:01 AM'],['Pacific Rim replied — offer auto-created','6:33 AM'],['Morning briefing generated · 4 users','7:00 AM']];
+  return `<div class="zed-panel"><div class="zed-hdr"><div class="zed-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--zl)" stroke-width="2.2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div style="flex:1"><div style="font-weight:700;font-size:14px;color:var(--zl)">ZED™</div><div style="font-size:10px;color:rgba(168,85,247,.65)">AI Operator · Colleague Mode</div></div><button onclick="toggleZed()" style="background:transparent;border:none;padding:4px;color:var(--muted)">${S.close}</button></div>
+  <div class="zed-sec"><div class="zed-lbl">ZED Needs You — 3 items</div>${C.zedNeeds.map(n=>`<div class="zed-need ${n.p}"><div style="font-size:12px;line-height:1.55;margin-bottom:7px">${n.text}</div><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:10px;color:var(--dim)">${n.time}</span><div style="display:flex;gap:5px"><button class="btn btn-sm" style="font-size:11px;color:var(--zl);border-color:rgba(123,47,190,.35);padding:3px 9px">Yes →</button><button class="btn btn-sm" style="font-size:11px;padding:3px 8px">Review</button></div></div></div>`).join('')}</div>
+  <div class="zed-sec scroll"><div class="zed-lbl">Morning Briefing</div><div style="background:rgba(123,47,190,.1);border:1px solid rgba(123,47,190,.18);border-radius:8px;padding:12px;margin-bottom:13px"><p style="font-size:12px;line-height:1.65;margin-bottom:8px">Good morning, Craig. Overnight I matched <strong style="color:var(--zl)">3 requirements</strong> against new offers and sent <strong style="color:var(--zl)">7 revival emails</strong> — two vendors replied.</p><p style="font-size:12px;line-height:1.65">You have <strong style="color:var(--red)">4 past-due sales orders</strong>. Acme Electronics is your top revival target — CRS 82, 90 days dormant, $142K lifetime GP.</p></div>
+  <div class="zed-lbl">Ask ZED</div><div style="display:flex;gap:8px;background:rgba(123,47,190,.1);border:1px solid rgba(123,47,190,.22);border-radius:8px;padding:7px 10px;margin-bottom:13px"><input class="inp" placeholder="Ask ZED anything…" style="background:transparent;border:none;padding:0;font-size:12px"><button class="btn btn-primary btn-sm" style="flex-shrink:0">${S.send}</button></div>
+  <div class="zed-lbl">ZED Overnight</div>${acts.map(([t,time],i)=>`<div style="display:flex;gap:8px;padding:6px 0;${i<acts.length-1?'border-bottom:1px solid var(--b1)':''}"><div style="width:5px;height:5px;border-radius:50%;background:var(--zl);flex-shrink:0;margin-top:5px"></div><div><div style="font-size:11px;line-height:1.5">${t}</div><div style="font-size:10px;color:var(--dim)">${time}</div></div></div>`).join('')}</div>
+  <div class="zed-disc">ZED is AI and can make mistakes. Please double-check responses. · Powered by STRUCZ™</div></div>`;
+}
+
+function goPage(p){page=p;company=null;activeTab=0;render()}
+function toggleZed(){zedOpen=!zedOpen;render()}
 render();
 </script>
 </body>
